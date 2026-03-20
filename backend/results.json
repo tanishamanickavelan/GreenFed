@@ -1,0 +1,911 @@
+{
+  "HOUSE001": {
+    "green_score": 65.2,
+    "elec_score": 46.0,
+    "water_score": 84.3,
+    "elec_waste": 54.0,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1443,
+    "rmse_water": 0.1284
+  },
+  "HOUSE002": {
+    "green_score": 64.7,
+    "elec_score": 45.1,
+    "water_score": 84.3,
+    "elec_waste": 54.9,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1453,
+    "rmse_water": 0.1315
+  },
+  "HOUSE003": {
+    "green_score": 64.9,
+    "elec_score": 46.0,
+    "water_score": 83.8,
+    "elec_waste": 54.0,
+    "water_waste": 16.2,
+    "rmse_elec": 0.1429,
+    "rmse_water": 0.1337
+  },
+  "HOUSE004": {
+    "green_score": 65.1,
+    "elec_score": 45.6,
+    "water_score": 84.6,
+    "elec_waste": 54.4,
+    "water_waste": 15.4,
+    "rmse_elec": 0.1437,
+    "rmse_water": 0.1258
+  },
+  "HOUSE005": {
+    "green_score": 65.3,
+    "elec_score": 46.3,
+    "water_score": 84.3,
+    "elec_waste": 53.7,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1416,
+    "rmse_water": 0.1257
+  },
+  "HOUSE006": {
+    "green_score": 64.7,
+    "elec_score": 46.0,
+    "water_score": 83.4,
+    "elec_waste": 54.0,
+    "water_waste": 16.6,
+    "rmse_elec": 0.1433,
+    "rmse_water": 0.1354
+  },
+  "HOUSE007": {
+    "green_score": 64.9,
+    "elec_score": 46.3,
+    "water_score": 83.6,
+    "elec_waste": 53.7,
+    "water_waste": 16.4,
+    "rmse_elec": 0.1431,
+    "rmse_water": 0.1316
+  },
+  "HOUSE008": {
+    "green_score": 64.4,
+    "elec_score": 45.5,
+    "water_score": 83.3,
+    "elec_waste": 54.5,
+    "water_waste": 16.7,
+    "rmse_elec": 0.1441,
+    "rmse_water": 0.1305
+  },
+  "HOUSE009": {
+    "green_score": 64.1,
+    "elec_score": 44.2,
+    "water_score": 83.9,
+    "elec_waste": 55.8,
+    "water_waste": 16.1,
+    "rmse_elec": 0.1473,
+    "rmse_water": 0.1303
+  },
+  "HOUSE010": {
+    "green_score": 65.2,
+    "elec_score": 46.0,
+    "water_score": 84.4,
+    "elec_waste": 54.0,
+    "water_waste": 15.6,
+    "rmse_elec": 0.1431,
+    "rmse_water": 0.1221
+  },
+  "HOUSE011": {
+    "green_score": 64.5,
+    "elec_score": 46.0,
+    "water_score": 83.0,
+    "elec_waste": 54.0,
+    "water_waste": 17.0,
+    "rmse_elec": 0.1424,
+    "rmse_water": 0.1403
+  },
+  "HOUSE012": {
+    "green_score": 64.2,
+    "elec_score": 45.2,
+    "water_score": 83.3,
+    "elec_waste": 54.8,
+    "water_waste": 16.7,
+    "rmse_elec": 0.1447,
+    "rmse_water": 0.1397
+  },
+  "HOUSE013": {
+    "green_score": 64.4,
+    "elec_score": 45.3,
+    "water_score": 83.5,
+    "elec_waste": 54.7,
+    "water_waste": 16.5,
+    "rmse_elec": 0.1437,
+    "rmse_water": 0.1341
+  },
+  "HOUSE014": {
+    "green_score": 64.9,
+    "elec_score": 46.1,
+    "water_score": 83.7,
+    "elec_waste": 53.9,
+    "water_waste": 16.3,
+    "rmse_elec": 0.143,
+    "rmse_water": 0.1337
+  },
+  "HOUSE015": {
+    "green_score": 64.2,
+    "elec_score": 44.9,
+    "water_score": 83.4,
+    "elec_waste": 55.1,
+    "water_waste": 16.6,
+    "rmse_elec": 0.1443,
+    "rmse_water": 0.1303
+  },
+  "HOUSE016": {
+    "green_score": 64.6,
+    "elec_score": 45.1,
+    "water_score": 84.1,
+    "elec_waste": 54.9,
+    "water_waste": 15.9,
+    "rmse_elec": 0.1451,
+    "rmse_water": 0.1304
+  },
+  "HOUSE017": {
+    "green_score": 64.2,
+    "elec_score": 46.0,
+    "water_score": 82.3,
+    "elec_waste": 54.0,
+    "water_waste": 17.7,
+    "rmse_elec": 0.1436,
+    "rmse_water": 0.1416
+  },
+  "HOUSE018": {
+    "green_score": 64.6,
+    "elec_score": 46.2,
+    "water_score": 83.0,
+    "elec_waste": 53.8,
+    "water_waste": 17.0,
+    "rmse_elec": 0.143,
+    "rmse_water": 0.1417
+  },
+  "HOUSE019": {
+    "green_score": 64.0,
+    "elec_score": 44.6,
+    "water_score": 83.3,
+    "elec_waste": 55.4,
+    "water_waste": 16.7,
+    "rmse_elec": 0.1453,
+    "rmse_water": 0.1388
+  },
+  "HOUSE020": {
+    "green_score": 63.8,
+    "elec_score": 44.1,
+    "water_score": 83.5,
+    "elec_waste": 55.9,
+    "water_waste": 16.5,
+    "rmse_elec": 0.1474,
+    "rmse_water": 0.1379
+  },
+  "HOUSE021": {
+    "green_score": 65.2,
+    "elec_score": 47.5,
+    "water_score": 83.0,
+    "elec_waste": 52.5,
+    "water_waste": 17.0,
+    "rmse_elec": 0.1401,
+    "rmse_water": 0.1357
+  },
+  "HOUSE022": {
+    "green_score": 64.6,
+    "elec_score": 45.9,
+    "water_score": 83.4,
+    "elec_waste": 54.1,
+    "water_waste": 16.6,
+    "rmse_elec": 0.1442,
+    "rmse_water": 0.1403
+  },
+  "HOUSE023": {
+    "green_score": 64.7,
+    "elec_score": 46.5,
+    "water_score": 82.9,
+    "elec_waste": 53.5,
+    "water_waste": 17.1,
+    "rmse_elec": 0.1415,
+    "rmse_water": 0.1364
+  },
+  "HOUSE024": {
+    "green_score": 64.4,
+    "elec_score": 46.6,
+    "water_score": 82.3,
+    "elec_waste": 53.4,
+    "water_waste": 17.7,
+    "rmse_elec": 0.1423,
+    "rmse_water": 0.1408
+  },
+  "HOUSE025": {
+    "green_score": 63.2,
+    "elec_score": 43.8,
+    "water_score": 82.5,
+    "elec_waste": 56.2,
+    "water_waste": 17.5,
+    "rmse_elec": 0.1488,
+    "rmse_water": 0.1479
+  },
+  "HOUSE026": {
+    "green_score": 65.8,
+    "elec_score": 46.3,
+    "water_score": 85.2,
+    "elec_waste": 53.7,
+    "water_waste": 14.8,
+    "rmse_elec": 0.1427,
+    "rmse_water": 0.122
+  },
+  "HOUSE027": {
+    "green_score": 65.4,
+    "elec_score": 46.9,
+    "water_score": 83.8,
+    "elec_waste": 53.1,
+    "water_waste": 16.2,
+    "rmse_elec": 0.1422,
+    "rmse_water": 0.131
+  },
+  "HOUSE028": {
+    "green_score": 64.7,
+    "elec_score": 44.6,
+    "water_score": 84.8,
+    "elec_waste": 55.4,
+    "water_waste": 15.2,
+    "rmse_elec": 0.1465,
+    "rmse_water": 0.1247
+  },
+  "HOUSE029": {
+    "green_score": 63.8,
+    "elec_score": 43.5,
+    "water_score": 84.2,
+    "elec_waste": 56.5,
+    "water_waste": 15.8,
+    "rmse_elec": 0.1503,
+    "rmse_water": 0.1261
+  },
+  "HOUSE030": {
+    "green_score": 65.0,
+    "elec_score": 46.5,
+    "water_score": 83.4,
+    "elec_waste": 53.5,
+    "water_waste": 16.6,
+    "rmse_elec": 0.1422,
+    "rmse_water": 0.1327
+  },
+  "HOUSE031": {
+    "green_score": 63.8,
+    "elec_score": 45.0,
+    "water_score": 82.5,
+    "elec_waste": 55.0,
+    "water_waste": 17.5,
+    "rmse_elec": 0.1452,
+    "rmse_water": 0.1438
+  },
+  "HOUSE032": {
+    "green_score": 64.8,
+    "elec_score": 45.4,
+    "water_score": 84.3,
+    "elec_waste": 54.6,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1447,
+    "rmse_water": 0.1274
+  },
+  "HOUSE033": {
+    "green_score": 64.4,
+    "elec_score": 45.3,
+    "water_score": 83.6,
+    "elec_waste": 54.7,
+    "water_waste": 16.4,
+    "rmse_elec": 0.1454,
+    "rmse_water": 0.1322
+  },
+  "HOUSE034": {
+    "green_score": 64.9,
+    "elec_score": 45.3,
+    "water_score": 84.5,
+    "elec_waste": 54.7,
+    "water_waste": 15.5,
+    "rmse_elec": 0.1438,
+    "rmse_water": 0.1269
+  },
+  "HOUSE035": {
+    "green_score": 65.0,
+    "elec_score": 46.7,
+    "water_score": 83.2,
+    "elec_waste": 53.3,
+    "water_waste": 16.8,
+    "rmse_elec": 0.1409,
+    "rmse_water": 0.132
+  },
+  "HOUSE036": {
+    "green_score": 64.4,
+    "elec_score": 44.5,
+    "water_score": 84.3,
+    "elec_waste": 55.5,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1459,
+    "rmse_water": 0.1244
+  },
+  "HOUSE037": {
+    "green_score": 64.5,
+    "elec_score": 45.9,
+    "water_score": 83.1,
+    "elec_waste": 54.1,
+    "water_waste": 16.9,
+    "rmse_elec": 0.1447,
+    "rmse_water": 0.1409
+  },
+  "HOUSE038": {
+    "green_score": 64.3,
+    "elec_score": 46.2,
+    "water_score": 82.4,
+    "elec_waste": 53.8,
+    "water_waste": 17.6,
+    "rmse_elec": 0.1422,
+    "rmse_water": 0.1396
+  },
+  "HOUSE039": {
+    "green_score": 65.0,
+    "elec_score": 46.1,
+    "water_score": 83.9,
+    "elec_waste": 53.9,
+    "water_waste": 16.1,
+    "rmse_elec": 0.1414,
+    "rmse_water": 0.1311
+  },
+  "HOUSE040": {
+    "green_score": 65.1,
+    "elec_score": 46.8,
+    "water_score": 83.4,
+    "elec_waste": 53.2,
+    "water_waste": 16.6,
+    "rmse_elec": 0.1419,
+    "rmse_water": 0.128
+  },
+  "HOUSE041": {
+    "green_score": 64.1,
+    "elec_score": 46.2,
+    "water_score": 81.9,
+    "elec_waste": 53.8,
+    "water_waste": 18.1,
+    "rmse_elec": 0.1439,
+    "rmse_water": 0.145
+  },
+  "HOUSE042": {
+    "green_score": 64.6,
+    "elec_score": 45.2,
+    "water_score": 83.9,
+    "elec_waste": 54.8,
+    "water_waste": 16.1,
+    "rmse_elec": 0.146,
+    "rmse_water": 0.1342
+  },
+  "HOUSE043": {
+    "green_score": 64.4,
+    "elec_score": 46.6,
+    "water_score": 82.3,
+    "elec_waste": 53.4,
+    "water_waste": 17.7,
+    "rmse_elec": 0.1443,
+    "rmse_water": 0.1486
+  },
+  "HOUSE044": {
+    "green_score": 65.2,
+    "elec_score": 45.2,
+    "water_score": 85.3,
+    "elec_waste": 54.8,
+    "water_waste": 14.7,
+    "rmse_elec": 0.1446,
+    "rmse_water": 0.1241
+  },
+  "HOUSE045": {
+    "green_score": 65.8,
+    "elec_score": 46.6,
+    "water_score": 84.9,
+    "elec_waste": 53.4,
+    "water_waste": 15.1,
+    "rmse_elec": 0.1424,
+    "rmse_water": 0.1271
+  },
+  "HOUSE046": {
+    "green_score": 65.4,
+    "elec_score": 46.2,
+    "water_score": 84.5,
+    "elec_waste": 53.8,
+    "water_waste": 15.5,
+    "rmse_elec": 0.1419,
+    "rmse_water": 0.1266
+  },
+  "HOUSE047": {
+    "green_score": 63.8,
+    "elec_score": 45.7,
+    "water_score": 82.0,
+    "elec_waste": 54.3,
+    "water_waste": 18.0,
+    "rmse_elec": 0.1441,
+    "rmse_water": 0.1428
+  },
+  "HOUSE048": {
+    "green_score": 64.3,
+    "elec_score": 45.0,
+    "water_score": 83.6,
+    "elec_waste": 55.0,
+    "water_waste": 16.4,
+    "rmse_elec": 0.1451,
+    "rmse_water": 0.1327
+  },
+  "HOUSE049": {
+    "green_score": 64.8,
+    "elec_score": 45.0,
+    "water_score": 84.6,
+    "elec_waste": 55.0,
+    "water_waste": 15.4,
+    "rmse_elec": 0.145,
+    "rmse_water": 0.1239
+  },
+  "HOUSE050": {
+    "green_score": 64.0,
+    "elec_score": 44.2,
+    "water_score": 83.7,
+    "elec_waste": 55.8,
+    "water_waste": 16.3,
+    "rmse_elec": 0.1482,
+    "rmse_water": 0.1314
+  },
+  "HOUSE051": {
+    "green_score": 64.9,
+    "elec_score": 45.7,
+    "water_score": 84.1,
+    "elec_waste": 54.3,
+    "water_waste": 15.9,
+    "rmse_elec": 0.143,
+    "rmse_water": 0.1297
+  },
+  "HOUSE052": {
+    "green_score": 64.8,
+    "elec_score": 45.9,
+    "water_score": 83.8,
+    "elec_waste": 54.1,
+    "water_waste": 16.2,
+    "rmse_elec": 0.1422,
+    "rmse_water": 0.1279
+  },
+  "HOUSE053": {
+    "green_score": 64.6,
+    "elec_score": 45.4,
+    "water_score": 83.9,
+    "elec_waste": 54.6,
+    "water_waste": 16.1,
+    "rmse_elec": 0.1443,
+    "rmse_water": 0.1316
+  },
+  "HOUSE054": {
+    "green_score": 65.4,
+    "elec_score": 45.3,
+    "water_score": 85.4,
+    "elec_waste": 54.7,
+    "water_waste": 14.6,
+    "rmse_elec": 0.1447,
+    "rmse_water": 0.1212
+  },
+  "HOUSE055": {
+    "green_score": 63.6,
+    "elec_score": 45.0,
+    "water_score": 82.2,
+    "elec_waste": 55.0,
+    "water_waste": 17.8,
+    "rmse_elec": 0.1453,
+    "rmse_water": 0.1459
+  },
+  "HOUSE056": {
+    "green_score": 64.0,
+    "elec_score": 45.2,
+    "water_score": 82.7,
+    "elec_waste": 54.8,
+    "water_waste": 17.3,
+    "rmse_elec": 0.1443,
+    "rmse_water": 0.1397
+  },
+  "HOUSE057": {
+    "green_score": 64.5,
+    "elec_score": 45.4,
+    "water_score": 83.6,
+    "elec_waste": 54.6,
+    "water_waste": 16.4,
+    "rmse_elec": 0.1441,
+    "rmse_water": 0.1382
+  },
+  "HOUSE058": {
+    "green_score": 64.7,
+    "elec_score": 45.5,
+    "water_score": 83.9,
+    "elec_waste": 54.5,
+    "water_waste": 16.1,
+    "rmse_elec": 0.1445,
+    "rmse_water": 0.1272
+  },
+  "HOUSE059": {
+    "green_score": 64.0,
+    "elec_score": 45.6,
+    "water_score": 82.5,
+    "elec_waste": 54.4,
+    "water_waste": 17.5,
+    "rmse_elec": 0.1438,
+    "rmse_water": 0.1421
+  },
+  "HOUSE060": {
+    "green_score": 64.2,
+    "elec_score": 45.3,
+    "water_score": 83.0,
+    "elec_waste": 54.7,
+    "water_waste": 17.0,
+    "rmse_elec": 0.145,
+    "rmse_water": 0.1376
+  },
+  "HOUSE061": {
+    "green_score": 64.8,
+    "elec_score": 45.8,
+    "water_score": 83.9,
+    "elec_waste": 54.2,
+    "water_waste": 16.1,
+    "rmse_elec": 0.1424,
+    "rmse_water": 0.1326
+  },
+  "HOUSE062": {
+    "green_score": 66.0,
+    "elec_score": 47.1,
+    "water_score": 85.0,
+    "elec_waste": 52.9,
+    "water_waste": 15.0,
+    "rmse_elec": 0.1386,
+    "rmse_water": 0.127
+  },
+  "HOUSE063": {
+    "green_score": 63.6,
+    "elec_score": 45.2,
+    "water_score": 82.1,
+    "elec_waste": 54.8,
+    "water_waste": 17.9,
+    "rmse_elec": 0.1454,
+    "rmse_water": 0.1502
+  },
+  "HOUSE064": {
+    "green_score": 64.6,
+    "elec_score": 45.1,
+    "water_score": 84.2,
+    "elec_waste": 54.9,
+    "water_waste": 15.8,
+    "rmse_elec": 0.1447,
+    "rmse_water": 0.1316
+  },
+  "HOUSE065": {
+    "green_score": 64.9,
+    "elec_score": 45.6,
+    "water_score": 84.2,
+    "elec_waste": 54.4,
+    "water_waste": 15.8,
+    "rmse_elec": 0.1436,
+    "rmse_water": 0.127
+  },
+  "HOUSE066": {
+    "green_score": 65.4,
+    "elec_score": 46.3,
+    "water_score": 84.5,
+    "elec_waste": 53.7,
+    "water_waste": 15.5,
+    "rmse_elec": 0.1438,
+    "rmse_water": 0.1269
+  },
+  "HOUSE067": {
+    "green_score": 64.6,
+    "elec_score": 45.0,
+    "water_score": 84.2,
+    "elec_waste": 55.0,
+    "water_waste": 15.8,
+    "rmse_elec": 0.1446,
+    "rmse_water": 0.1268
+  },
+  "HOUSE068": {
+    "green_score": 65.6,
+    "elec_score": 46.6,
+    "water_score": 84.5,
+    "elec_waste": 53.4,
+    "water_waste": 15.5,
+    "rmse_elec": 0.143,
+    "rmse_water": 0.129
+  },
+  "HOUSE069": {
+    "green_score": 65.6,
+    "elec_score": 46.3,
+    "water_score": 84.8,
+    "elec_waste": 53.7,
+    "water_waste": 15.2,
+    "rmse_elec": 0.1414,
+    "rmse_water": 0.1215
+  },
+  "HOUSE070": {
+    "green_score": 64.2,
+    "elec_score": 46.6,
+    "water_score": 81.8,
+    "elec_waste": 53.4,
+    "water_waste": 18.2,
+    "rmse_elec": 0.1412,
+    "rmse_water": 0.1413
+  },
+  "HOUSE071": {
+    "green_score": 64.2,
+    "elec_score": 45.8,
+    "water_score": 82.7,
+    "elec_waste": 54.2,
+    "water_waste": 17.3,
+    "rmse_elec": 0.1428,
+    "rmse_water": 0.1415
+  },
+  "HOUSE072": {
+    "green_score": 64.4,
+    "elec_score": 45.8,
+    "water_score": 83.1,
+    "elec_waste": 54.2,
+    "water_waste": 16.9,
+    "rmse_elec": 0.1421,
+    "rmse_water": 0.1355
+  },
+  "HOUSE073": {
+    "green_score": 63.8,
+    "elec_score": 44.7,
+    "water_score": 83.0,
+    "elec_waste": 55.3,
+    "water_waste": 17.0,
+    "rmse_elec": 0.1462,
+    "rmse_water": 0.1445
+  },
+  "HOUSE074": {
+    "green_score": 65.0,
+    "elec_score": 45.7,
+    "water_score": 84.3,
+    "elec_waste": 54.3,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1445,
+    "rmse_water": 0.1226
+  },
+  "HOUSE075": {
+    "green_score": 65.2,
+    "elec_score": 46.0,
+    "water_score": 84.4,
+    "elec_waste": 54.0,
+    "water_waste": 15.6,
+    "rmse_elec": 0.1421,
+    "rmse_water": 0.1245
+  },
+  "HOUSE076": {
+    "green_score": 63.8,
+    "elec_score": 45.6,
+    "water_score": 82.0,
+    "elec_waste": 54.4,
+    "water_waste": 18.0,
+    "rmse_elec": 0.1437,
+    "rmse_water": 0.1481
+  },
+  "HOUSE077": {
+    "green_score": 65.2,
+    "elec_score": 46.6,
+    "water_score": 83.9,
+    "elec_waste": 53.4,
+    "water_waste": 16.1,
+    "rmse_elec": 0.1424,
+    "rmse_water": 0.1263
+  },
+  "HOUSE078": {
+    "green_score": 64.5,
+    "elec_score": 44.7,
+    "water_score": 84.3,
+    "elec_waste": 55.3,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1452,
+    "rmse_water": 0.1279
+  },
+  "HOUSE079": {
+    "green_score": 64.8,
+    "elec_score": 46.1,
+    "water_score": 83.6,
+    "elec_waste": 53.9,
+    "water_waste": 16.4,
+    "rmse_elec": 0.1434,
+    "rmse_water": 0.132
+  },
+  "HOUSE080": {
+    "green_score": 63.4,
+    "elec_score": 43.6,
+    "water_score": 83.2,
+    "elec_waste": 56.4,
+    "water_waste": 16.8,
+    "rmse_elec": 0.1483,
+    "rmse_water": 0.1341
+  },
+  "HOUSE081": {
+    "green_score": 65.4,
+    "elec_score": 47.0,
+    "water_score": 83.7,
+    "elec_waste": 53.0,
+    "water_waste": 16.3,
+    "rmse_elec": 0.1412,
+    "rmse_water": 0.131
+  },
+  "HOUSE082": {
+    "green_score": 65.3,
+    "elec_score": 45.4,
+    "water_score": 85.2,
+    "elec_waste": 54.6,
+    "water_waste": 14.8,
+    "rmse_elec": 0.1435,
+    "rmse_water": 0.1285
+  },
+  "HOUSE083": {
+    "green_score": 64.8,
+    "elec_score": 45.5,
+    "water_score": 84.2,
+    "elec_waste": 54.5,
+    "water_waste": 15.8,
+    "rmse_elec": 0.1452,
+    "rmse_water": 0.1312
+  },
+  "HOUSE084": {
+    "green_score": 64.8,
+    "elec_score": 46.2,
+    "water_score": 83.4,
+    "elec_waste": 53.8,
+    "water_waste": 16.6,
+    "rmse_elec": 0.1427,
+    "rmse_water": 0.1321
+  },
+  "HOUSE085": {
+    "green_score": 65.3,
+    "elec_score": 45.4,
+    "water_score": 85.2,
+    "elec_waste": 54.6,
+    "water_waste": 14.8,
+    "rmse_elec": 0.1458,
+    "rmse_water": 0.1174
+  },
+  "HOUSE086": {
+    "green_score": 63.7,
+    "elec_score": 44.5,
+    "water_score": 82.9,
+    "elec_waste": 55.5,
+    "water_waste": 17.1,
+    "rmse_elec": 0.1463,
+    "rmse_water": 0.1447
+  },
+  "HOUSE087": {
+    "green_score": 65.4,
+    "elec_score": 46.0,
+    "water_score": 84.8,
+    "elec_waste": 54.0,
+    "water_waste": 15.2,
+    "rmse_elec": 0.1428,
+    "rmse_water": 0.1238
+  },
+  "HOUSE088": {
+    "green_score": 64.2,
+    "elec_score": 45.5,
+    "water_score": 82.9,
+    "elec_waste": 54.5,
+    "water_waste": 17.1,
+    "rmse_elec": 0.1435,
+    "rmse_water": 0.1363
+  },
+  "HOUSE089": {
+    "green_score": 63.2,
+    "elec_score": 44.7,
+    "water_score": 81.8,
+    "elec_waste": 55.3,
+    "water_waste": 18.2,
+    "rmse_elec": 0.1455,
+    "rmse_water": 0.1506
+  },
+  "HOUSE090": {
+    "green_score": 65.3,
+    "elec_score": 47.1,
+    "water_score": 83.5,
+    "elec_waste": 52.9,
+    "water_waste": 16.5,
+    "rmse_elec": 0.1413,
+    "rmse_water": 0.1301
+  },
+  "HOUSE091": {
+    "green_score": 64.5,
+    "elec_score": 46.4,
+    "water_score": 82.6,
+    "elec_waste": 53.6,
+    "water_waste": 17.4,
+    "rmse_elec": 0.1414,
+    "rmse_water": 0.138
+  },
+  "HOUSE092": {
+    "green_score": 63.6,
+    "elec_score": 44.7,
+    "water_score": 82.6,
+    "elec_waste": 55.3,
+    "water_waste": 17.4,
+    "rmse_elec": 0.1467,
+    "rmse_water": 0.1443
+  },
+  "HOUSE093": {
+    "green_score": 64.7,
+    "elec_score": 45.2,
+    "water_score": 84.2,
+    "elec_waste": 54.8,
+    "water_waste": 15.8,
+    "rmse_elec": 0.1454,
+    "rmse_water": 0.1293
+  },
+  "HOUSE094": {
+    "green_score": 64.2,
+    "elec_score": 46.3,
+    "water_score": 82.1,
+    "elec_waste": 53.7,
+    "water_waste": 17.9,
+    "rmse_elec": 0.1425,
+    "rmse_water": 0.1471
+  },
+  "HOUSE095": {
+    "green_score": 64.7,
+    "elec_score": 46.1,
+    "water_score": 83.3,
+    "elec_waste": 53.9,
+    "water_waste": 16.7,
+    "rmse_elec": 0.1433,
+    "rmse_water": 0.1365
+  },
+  "HOUSE096": {
+    "green_score": 66.6,
+    "elec_score": 48.4,
+    "water_score": 84.8,
+    "elec_waste": 51.6,
+    "water_waste": 15.2,
+    "rmse_elec": 0.1384,
+    "rmse_water": 0.128
+  },
+  "HOUSE097": {
+    "green_score": 65.0,
+    "elec_score": 45.7,
+    "water_score": 84.3,
+    "elec_waste": 54.3,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1431,
+    "rmse_water": 0.1308
+  },
+  "HOUSE098": {
+    "green_score": 65.6,
+    "elec_score": 47.0,
+    "water_score": 84.3,
+    "elec_waste": 53.0,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1427,
+    "rmse_water": 0.1285
+  },
+  "HOUSE099": {
+    "green_score": 65.4,
+    "elec_score": 45.3,
+    "water_score": 85.6,
+    "elec_waste": 54.7,
+    "water_waste": 14.4,
+    "rmse_elec": 0.1453,
+    "rmse_water": 0.1175
+  },
+  "HOUSE100": {
+    "green_score": 65.4,
+    "elec_score": 46.4,
+    "water_score": 84.3,
+    "elec_waste": 53.6,
+    "water_waste": 15.7,
+    "rmse_elec": 0.1417,
+    "rmse_water": 0.129
+  },
+  "HOUSE101": {
+    "green_score": 64.6,
+    "elec_score": 45.1,
+    "water_score": 84.1,
+    "elec_waste": 54.9,
+    "water_waste": 15.9,
+    "rmse_elec": 0.1457,
+    "rmse_water": 0.1265
+  }
+}

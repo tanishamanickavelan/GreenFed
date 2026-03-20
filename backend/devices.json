@@ -1,0 +1,1820 @@
+{
+  "HOUSE001": {
+    "electricity": {
+      "AC": 53.5,
+      "Refrigerator": 12.9,
+      "Washing Machine": 9.3,
+      "Lights": 6.3,
+      "Other": 18.1
+    },
+    "water": {
+      "Water Heater": 19.3,
+      "Washing Machine": 14.4,
+      "Bathroom": 45.4,
+      "Kitchen": 20.8
+    },
+    "avg_daily_elec": 16.97,
+    "avg_daily_water": 344.79,
+    "profile": "heavy_ac"
+  },
+  "HOUSE002": {
+    "electricity": {
+      "AC": 28.3,
+      "Refrigerator": 22.9,
+      "Washing Machine": 15.4,
+      "Lights": 22.3,
+      "Other": 11.1
+    },
+    "water": {
+      "Water Heater": 22.2,
+      "Washing Machine": 14.9,
+      "Bathroom": 24.0,
+      "Kitchen": 38.9
+    },
+    "avg_daily_elec": 22.19,
+    "avg_daily_water": 218.5,
+    "profile": "all_rounder"
+  },
+  "HOUSE003": {
+    "electricity": {
+      "AC": 22.9,
+      "Refrigerator": 36.3,
+      "Washing Machine": 13.2,
+      "Lights": 12.2,
+      "Other": 15.4
+    },
+    "water": {
+      "Water Heater": 52.2,
+      "Washing Machine": 11.3,
+      "Bathroom": 21.9,
+      "Kitchen": 14.6
+    },
+    "avg_daily_elec": 18.21,
+    "avg_daily_water": 416.25,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE004": {
+    "electricity": {
+      "AC": 15.8,
+      "Refrigerator": 19.5,
+      "Washing Machine": 7.6,
+      "Lights": 46.4,
+      "Other": 10.7
+    },
+    "water": {
+      "Water Heater": 24.7,
+      "Washing Machine": 21.7,
+      "Bathroom": 32.0,
+      "Kitchen": 21.7
+    },
+    "avg_daily_elec": 11.42,
+    "avg_daily_water": 469.1,
+    "profile": "lights_heavy"
+  },
+  "HOUSE005": {
+    "electricity": {
+      "AC": 27.8,
+      "Refrigerator": 14.5,
+      "Washing Machine": 35.3,
+      "Lights": 13.5,
+      "Other": 9.0
+    },
+    "water": {
+      "Water Heater": 26.2,
+      "Washing Machine": 16.8,
+      "Bathroom": 44.8,
+      "Kitchen": 12.3
+    },
+    "avg_daily_elec": 20.21,
+    "avg_daily_water": 359.22,
+    "profile": "washer_heavy"
+  },
+  "HOUSE006": {
+    "electricity": {
+      "AC": 52.6,
+      "Refrigerator": 12.1,
+      "Washing Machine": 9.8,
+      "Lights": 6.2,
+      "Other": 19.4
+    },
+    "water": {
+      "Water Heater": 23.8,
+      "Washing Machine": 14.5,
+      "Bathroom": 25.7,
+      "Kitchen": 36.0
+    },
+    "avg_daily_elec": 7.38,
+    "avg_daily_water": 270.85,
+    "profile": "heavy_ac"
+  },
+  "HOUSE007": {
+    "electricity": {
+      "AC": 29.2,
+      "Refrigerator": 21.2,
+      "Washing Machine": 14.4,
+      "Lights": 17.1,
+      "Other": 18.1
+    },
+    "water": {
+      "Water Heater": 50.5,
+      "Washing Machine": 13.6,
+      "Bathroom": 20.1,
+      "Kitchen": 15.9
+    },
+    "avg_daily_elec": 7.24,
+    "avg_daily_water": 451.04,
+    "profile": "all_rounder"
+  },
+  "HOUSE008": {
+    "electricity": {
+      "AC": 19.9,
+      "Refrigerator": 39.4,
+      "Washing Machine": 10.4,
+      "Lights": 17.3,
+      "Other": 13.1
+    },
+    "water": {
+      "Water Heater": 25.1,
+      "Washing Machine": 24.1,
+      "Bathroom": 27.7,
+      "Kitchen": 23.2
+    },
+    "avg_daily_elec": 9.6,
+    "avg_daily_water": 296.53,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE009": {
+    "electricity": {
+      "AC": 23.8,
+      "Refrigerator": 16.6,
+      "Washing Machine": 9.1,
+      "Lights": 38.2,
+      "Other": 12.4
+    },
+    "water": {
+      "Water Heater": 22.3,
+      "Washing Machine": 14.9,
+      "Bathroom": 50.6,
+      "Kitchen": 12.2
+    },
+    "avg_daily_elec": 21.77,
+    "avg_daily_water": 158.67,
+    "profile": "lights_heavy"
+  },
+  "HOUSE010": {
+    "electricity": {
+      "AC": 28.6,
+      "Refrigerator": 21.2,
+      "Washing Machine": 37.3,
+      "Lights": 6.2,
+      "Other": 6.7
+    },
+    "water": {
+      "Water Heater": 24.8,
+      "Washing Machine": 11.9,
+      "Bathroom": 24.4,
+      "Kitchen": 38.8
+    },
+    "avg_daily_elec": 24.48,
+    "avg_daily_water": 194.48,
+    "profile": "washer_heavy"
+  },
+  "HOUSE011": {
+    "electricity": {
+      "AC": 52.8,
+      "Refrigerator": 11.2,
+      "Washing Machine": 9.9,
+      "Lights": 10.1,
+      "Other": 16.0
+    },
+    "water": {
+      "Water Heater": 53.1,
+      "Washing Machine": 11.2,
+      "Bathroom": 23.6,
+      "Kitchen": 12.0
+    },
+    "avg_daily_elec": 24.7,
+    "avg_daily_water": 452.84,
+    "profile": "heavy_ac"
+  },
+  "HOUSE012": {
+    "electricity": {
+      "AC": 25.1,
+      "Refrigerator": 22.7,
+      "Washing Machine": 15.4,
+      "Lights": 18.7,
+      "Other": 18.1
+    },
+    "water": {
+      "Water Heater": 25.4,
+      "Washing Machine": 24.7,
+      "Bathroom": 29.5,
+      "Kitchen": 20.5
+    },
+    "avg_daily_elec": 13.75,
+    "avg_daily_water": 333.81,
+    "profile": "all_rounder"
+  },
+  "HOUSE013": {
+    "electricity": {
+      "AC": 11.8,
+      "Refrigerator": 43.6,
+      "Washing Machine": 13.8,
+      "Lights": 16.9,
+      "Other": 13.9
+    },
+    "water": {
+      "Water Heater": 19.0,
+      "Washing Machine": 19.2,
+      "Bathroom": 42.0,
+      "Kitchen": 19.8
+    },
+    "avg_daily_elec": 24.48,
+    "avg_daily_water": 252.24,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE014": {
+    "electricity": {
+      "AC": 25.1,
+      "Refrigerator": 15.1,
+      "Washing Machine": 10.3,
+      "Lights": 37.6,
+      "Other": 11.9
+    },
+    "water": {
+      "Water Heater": 24.3,
+      "Washing Machine": 13.6,
+      "Bathroom": 27.9,
+      "Kitchen": 34.2
+    },
+    "avg_daily_elec": 25.81,
+    "avg_daily_water": 397.34,
+    "profile": "lights_heavy"
+  },
+  "HOUSE015": {
+    "electricity": {
+      "AC": 21.4,
+      "Refrigerator": 18.8,
+      "Washing Machine": 38.6,
+      "Lights": 12.2,
+      "Other": 8.9
+    },
+    "water": {
+      "Water Heater": 46.4,
+      "Washing Machine": 16.0,
+      "Bathroom": 21.9,
+      "Kitchen": 15.7
+    },
+    "avg_daily_elec": 9.51,
+    "avg_daily_water": 455.63,
+    "profile": "washer_heavy"
+  },
+  "HOUSE016": {
+    "electricity": {
+      "AC": 50.3,
+      "Refrigerator": 14.0,
+      "Washing Machine": 7.6,
+      "Lights": 9.7,
+      "Other": 18.4
+    },
+    "water": {
+      "Water Heater": 21.2,
+      "Washing Machine": 26.3,
+      "Bathroom": 32.1,
+      "Kitchen": 20.4
+    },
+    "avg_daily_elec": 20.53,
+    "avg_daily_water": 425.22,
+    "profile": "heavy_ac"
+  },
+  "HOUSE017": {
+    "electricity": {
+      "AC": 24.5,
+      "Refrigerator": 20.8,
+      "Washing Machine": 14.9,
+      "Lights": 20.8,
+      "Other": 19.0
+    },
+    "water": {
+      "Water Heater": 22.1,
+      "Washing Machine": 14.9,
+      "Bathroom": 47.3,
+      "Kitchen": 15.7
+    },
+    "avg_daily_elec": 22.6,
+    "avg_daily_water": 265.66,
+    "profile": "all_rounder"
+  },
+  "HOUSE018": {
+    "electricity": {
+      "AC": 17.6,
+      "Refrigerator": 36.5,
+      "Washing Machine": 11.5,
+      "Lights": 15.8,
+      "Other": 18.6
+    },
+    "water": {
+      "Water Heater": 21.6,
+      "Washing Machine": 10.8,
+      "Bathroom": 20.6,
+      "Kitchen": 47.0
+    },
+    "avg_daily_elec": 24.23,
+    "avg_daily_water": 457.2,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE019": {
+    "electricity": {
+      "AC": 25.4,
+      "Refrigerator": 17.5,
+      "Washing Machine": 7.5,
+      "Lights": 42.9,
+      "Other": 6.7
+    },
+    "water": {
+      "Water Heater": 49.4,
+      "Washing Machine": 13.0,
+      "Bathroom": 23.4,
+      "Kitchen": 14.2
+    },
+    "avg_daily_elec": 20.85,
+    "avg_daily_water": 477.37,
+    "profile": "lights_heavy"
+  },
+  "HOUSE020": {
+    "electricity": {
+      "AC": 27.4,
+      "Refrigerator": 15.8,
+      "Washing Machine": 37.9,
+      "Lights": 9.5,
+      "Other": 9.4
+    },
+    "water": {
+      "Water Heater": 23.0,
+      "Washing Machine": 25.2,
+      "Bathroom": 27.9,
+      "Kitchen": 23.9
+    },
+    "avg_daily_elec": 10.33,
+    "avg_daily_water": 236.81,
+    "profile": "washer_heavy"
+  },
+  "HOUSE021": {
+    "electricity": {
+      "AC": 55.3,
+      "Refrigerator": 13.1,
+      "Washing Machine": 8.1,
+      "Lights": 6.6,
+      "Other": 16.9
+    },
+    "water": {
+      "Water Heater": 21.5,
+      "Washing Machine": 18.5,
+      "Bathroom": 43.4,
+      "Kitchen": 16.6
+    },
+    "avg_daily_elec": 11.92,
+    "avg_daily_water": 212.0,
+    "profile": "heavy_ac"
+  },
+  "HOUSE022": {
+    "electricity": {
+      "AC": 26.3,
+      "Refrigerator": 20.2,
+      "Washing Machine": 16.6,
+      "Lights": 19.2,
+      "Other": 17.8
+    },
+    "water": {
+      "Water Heater": 27.5,
+      "Washing Machine": 10.2,
+      "Bathroom": 22.9,
+      "Kitchen": 39.4
+    },
+    "avg_daily_elec": 19.89,
+    "avg_daily_water": 313.84,
+    "profile": "all_rounder"
+  },
+  "HOUSE023": {
+    "electricity": {
+      "AC": 12.8,
+      "Refrigerator": 41.6,
+      "Washing Machine": 12.4,
+      "Lights": 18.4,
+      "Other": 14.7
+    },
+    "water": {
+      "Water Heater": 50.6,
+      "Washing Machine": 12.9,
+      "Bathroom": 24.5,
+      "Kitchen": 11.9
+    },
+    "avg_daily_elec": 12.16,
+    "avg_daily_water": 293.05,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE024": {
+    "electricity": {
+      "AC": 24.1,
+      "Refrigerator": 20.3,
+      "Washing Machine": 8.8,
+      "Lights": 41.2,
+      "Other": 5.6
+    },
+    "water": {
+      "Water Heater": 26.6,
+      "Washing Machine": 29.4,
+      "Bathroom": 28.5,
+      "Kitchen": 15.6
+    },
+    "avg_daily_elec": 12.46,
+    "avg_daily_water": 311.85,
+    "profile": "lights_heavy"
+  },
+  "HOUSE025": {
+    "electricity": {
+      "AC": 27.1,
+      "Refrigerator": 16.4,
+      "Washing Machine": 37.7,
+      "Lights": 5.8,
+      "Other": 13.0
+    },
+    "water": {
+      "Water Heater": 19.0,
+      "Washing Machine": 13.2,
+      "Bathroom": 48.6,
+      "Kitchen": 19.2
+    },
+    "avg_daily_elec": 15.42,
+    "avg_daily_water": 205.22,
+    "profile": "washer_heavy"
+  },
+  "HOUSE026": {
+    "electricity": {
+      "AC": 59.9,
+      "Refrigerator": 12.1,
+      "Washing Machine": 6.0,
+      "Lights": 6.0,
+      "Other": 16.0
+    },
+    "water": {
+      "Water Heater": 24.6,
+      "Washing Machine": 11.2,
+      "Bathroom": 23.6,
+      "Kitchen": 40.6
+    },
+    "avg_daily_elec": 22.82,
+    "avg_daily_water": 160.16,
+    "profile": "heavy_ac"
+  },
+  "HOUSE027": {
+    "electricity": {
+      "AC": 27.8,
+      "Refrigerator": 19.1,
+      "Washing Machine": 14.1,
+      "Lights": 19.8,
+      "Other": 19.3
+    },
+    "water": {
+      "Water Heater": 41.0,
+      "Washing Machine": 14.7,
+      "Bathroom": 29.8,
+      "Kitchen": 14.5
+    },
+    "avg_daily_elec": 25.42,
+    "avg_daily_water": 350.25,
+    "profile": "all_rounder"
+  },
+  "HOUSE028": {
+    "electricity": {
+      "AC": 13.7,
+      "Refrigerator": 40.3,
+      "Washing Machine": 11.1,
+      "Lights": 18.7,
+      "Other": 16.2
+    },
+    "water": {
+      "Water Heater": 27.9,
+      "Washing Machine": 24.8,
+      "Bathroom": 26.1,
+      "Kitchen": 21.2
+    },
+    "avg_daily_elec": 15.38,
+    "avg_daily_water": 286.33,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE029": {
+    "electricity": {
+      "AC": 19.5,
+      "Refrigerator": 14.9,
+      "Washing Machine": 7.7,
+      "Lights": 43.5,
+      "Other": 14.4
+    },
+    "water": {
+      "Water Heater": 22.4,
+      "Washing Machine": 15.7,
+      "Bathroom": 46.4,
+      "Kitchen": 15.5
+    },
+    "avg_daily_elec": 6.79,
+    "avg_daily_water": 292.63,
+    "profile": "lights_heavy"
+  },
+  "HOUSE030": {
+    "electricity": {
+      "AC": 24.4,
+      "Refrigerator": 16.1,
+      "Washing Machine": 36.7,
+      "Lights": 9.6,
+      "Other": 13.2
+    },
+    "water": {
+      "Water Heater": 21.7,
+      "Washing Machine": 13.2,
+      "Bathroom": 22.8,
+      "Kitchen": 42.2
+    },
+    "avg_daily_elec": 17.79,
+    "avg_daily_water": 507.59,
+    "profile": "washer_heavy"
+  },
+  "HOUSE031": {
+    "electricity": {
+      "AC": 52.5,
+      "Refrigerator": 13.8,
+      "Washing Machine": 8.7,
+      "Lights": 9.4,
+      "Other": 15.7
+    },
+    "water": {
+      "Water Heater": 50.0,
+      "Washing Machine": 13.4,
+      "Bathroom": 24.7,
+      "Kitchen": 11.8
+    },
+    "avg_daily_elec": 10.72,
+    "avg_daily_water": 452.38,
+    "profile": "heavy_ac"
+  },
+  "HOUSE032": {
+    "electricity": {
+      "AC": 32.4,
+      "Refrigerator": 19.0,
+      "Washing Machine": 15.8,
+      "Lights": 19.9,
+      "Other": 12.9
+    },
+    "water": {
+      "Water Heater": 27.2,
+      "Washing Machine": 23.3,
+      "Bathroom": 30.9,
+      "Kitchen": 18.6
+    },
+    "avg_daily_elec": 20.33,
+    "avg_daily_water": 521.28,
+    "profile": "all_rounder"
+  },
+  "HOUSE033": {
+    "electricity": {
+      "AC": 11.0,
+      "Refrigerator": 36.0,
+      "Washing Machine": 14.5,
+      "Lights": 17.5,
+      "Other": 21.0
+    },
+    "water": {
+      "Water Heater": 19.9,
+      "Washing Machine": 12.1,
+      "Bathroom": 53.0,
+      "Kitchen": 14.9
+    },
+    "avg_daily_elec": 22.57,
+    "avg_daily_water": 436.95,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE034": {
+    "electricity": {
+      "AC": 22.7,
+      "Refrigerator": 17.1,
+      "Washing Machine": 9.2,
+      "Lights": 39.5,
+      "Other": 11.6
+    },
+    "water": {
+      "Water Heater": 22.6,
+      "Washing Machine": 11.1,
+      "Bathroom": 23.7,
+      "Kitchen": 42.6
+    },
+    "avg_daily_elec": 16.19,
+    "avg_daily_water": 434.42,
+    "profile": "lights_heavy"
+  },
+  "HOUSE035": {
+    "electricity": {
+      "AC": 26.8,
+      "Refrigerator": 13.8,
+      "Washing Machine": 35.1,
+      "Lights": 8.8,
+      "Other": 15.6
+    },
+    "water": {
+      "Water Heater": 47.3,
+      "Washing Machine": 12.2,
+      "Bathroom": 22.3,
+      "Kitchen": 18.1
+    },
+    "avg_daily_elec": 11.32,
+    "avg_daily_water": 322.4,
+    "profile": "washer_heavy"
+  },
+  "HOUSE036": {
+    "electricity": {
+      "AC": 55.5,
+      "Refrigerator": 15.3,
+      "Washing Machine": 6.5,
+      "Lights": 8.0,
+      "Other": 14.8
+    },
+    "water": {
+      "Water Heater": 27.0,
+      "Washing Machine": 24.4,
+      "Bathroom": 32.1,
+      "Kitchen": 16.5
+    },
+    "avg_daily_elec": 19.8,
+    "avg_daily_water": 179.68,
+    "profile": "heavy_ac"
+  },
+  "HOUSE037": {
+    "electricity": {
+      "AC": 29.4,
+      "Refrigerator": 18.4,
+      "Washing Machine": 17.5,
+      "Lights": 21.3,
+      "Other": 13.5
+    },
+    "water": {
+      "Water Heater": 17.5,
+      "Washing Machine": 12.2,
+      "Bathroom": 54.4,
+      "Kitchen": 15.9
+    },
+    "avg_daily_elec": 16.5,
+    "avg_daily_water": 352.75,
+    "profile": "all_rounder"
+  },
+  "HOUSE038": {
+    "electricity": {
+      "AC": 10.8,
+      "Refrigerator": 41.5,
+      "Washing Machine": 10.8,
+      "Lights": 19.5,
+      "Other": 17.5
+    },
+    "water": {
+      "Water Heater": 22.5,
+      "Washing Machine": 12.7,
+      "Bathroom": 25.3,
+      "Kitchen": 39.5
+    },
+    "avg_daily_elec": 6.43,
+    "avg_daily_water": 387.74,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE039": {
+    "electricity": {
+      "AC": 16.3,
+      "Refrigerator": 21.1,
+      "Washing Machine": 7.3,
+      "Lights": 43.6,
+      "Other": 11.6
+    },
+    "water": {
+      "Water Heater": 43.8,
+      "Washing Machine": 10.9,
+      "Bathroom": 27.9,
+      "Kitchen": 17.4
+    },
+    "avg_daily_elec": 9.9,
+    "avg_daily_water": 355.72,
+    "profile": "lights_heavy"
+  },
+  "HOUSE040": {
+    "electricity": {
+      "AC": 26.3,
+      "Refrigerator": 16.4,
+      "Washing Machine": 40.6,
+      "Lights": 5.5,
+      "Other": 11.2
+    },
+    "water": {
+      "Water Heater": 23.2,
+      "Washing Machine": 25.4,
+      "Bathroom": 26.3,
+      "Kitchen": 25.1
+    },
+    "avg_daily_elec": 20.68,
+    "avg_daily_water": 368.5,
+    "profile": "washer_heavy"
+  },
+  "HOUSE041": {
+    "electricity": {
+      "AC": 52.4,
+      "Refrigerator": 11.8,
+      "Washing Machine": 7.1,
+      "Lights": 8.4,
+      "Other": 20.5
+    },
+    "water": {
+      "Water Heater": 21.6,
+      "Washing Machine": 19.2,
+      "Bathroom": 44.7,
+      "Kitchen": 14.5
+    },
+    "avg_daily_elec": 13.62,
+    "avg_daily_water": 262.29,
+    "profile": "heavy_ac"
+  },
+  "HOUSE042": {
+    "electricity": {
+      "AC": 29.2,
+      "Refrigerator": 19.0,
+      "Washing Machine": 13.1,
+      "Lights": 21.5,
+      "Other": 17.3
+    },
+    "water": {
+      "Water Heater": 19.0,
+      "Washing Machine": 11.7,
+      "Bathroom": 24.8,
+      "Kitchen": 44.4
+    },
+    "avg_daily_elec": 20.36,
+    "avg_daily_water": 303.8,
+    "profile": "all_rounder"
+  },
+  "HOUSE043": {
+    "electricity": {
+      "AC": 17.4,
+      "Refrigerator": 38.2,
+      "Washing Machine": 17.9,
+      "Lights": 12.6,
+      "Other": 14.0
+    },
+    "water": {
+      "Water Heater": 52.0,
+      "Washing Machine": 10.1,
+      "Bathroom": 24.3,
+      "Kitchen": 13.6
+    },
+    "avg_daily_elec": 26.0,
+    "avg_daily_water": 449.26,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE044": {
+    "electricity": {
+      "AC": 18.2,
+      "Refrigerator": 16.3,
+      "Washing Machine": 5.2,
+      "Lights": 46.8,
+      "Other": 13.5
+    },
+    "water": {
+      "Water Heater": 26.3,
+      "Washing Machine": 23.3,
+      "Bathroom": 34.7,
+      "Kitchen": 15.7
+    },
+    "avg_daily_elec": 12.48,
+    "avg_daily_water": 161.94,
+    "profile": "lights_heavy"
+  },
+  "HOUSE045": {
+    "electricity": {
+      "AC": 20.6,
+      "Refrigerator": 16.8,
+      "Washing Machine": 37.4,
+      "Lights": 13.9,
+      "Other": 11.2
+    },
+    "water": {
+      "Water Heater": 22.8,
+      "Washing Machine": 18.8,
+      "Bathroom": 47.4,
+      "Kitchen": 11.0
+    },
+    "avg_daily_elec": 19.53,
+    "avg_daily_water": 343.42,
+    "profile": "washer_heavy"
+  },
+  "HOUSE046": {
+    "electricity": {
+      "AC": 53.8,
+      "Refrigerator": 16.1,
+      "Washing Machine": 6.7,
+      "Lights": 10.7,
+      "Other": 12.6
+    },
+    "water": {
+      "Water Heater": 27.4,
+      "Washing Machine": 10.7,
+      "Bathroom": 26.6,
+      "Kitchen": 35.2
+    },
+    "avg_daily_elec": 18.91,
+    "avg_daily_water": 360.67,
+    "profile": "heavy_ac"
+  },
+  "HOUSE047": {
+    "electricity": {
+      "AC": 29.1,
+      "Refrigerator": 16.4,
+      "Washing Machine": 15.9,
+      "Lights": 19.9,
+      "Other": 18.7
+    },
+    "water": {
+      "Water Heater": 48.3,
+      "Washing Machine": 13.2,
+      "Bathroom": 26.5,
+      "Kitchen": 11.9
+    },
+    "avg_daily_elec": 24.96,
+    "avg_daily_water": 316.28,
+    "profile": "all_rounder"
+  },
+  "HOUSE048": {
+    "electricity": {
+      "AC": 13.6,
+      "Refrigerator": 38.9,
+      "Washing Machine": 13.2,
+      "Lights": 12.9,
+      "Other": 21.5
+    },
+    "water": {
+      "Water Heater": 23.3,
+      "Washing Machine": 24.3,
+      "Bathroom": 29.0,
+      "Kitchen": 23.4
+    },
+    "avg_daily_elec": 13.02,
+    "avg_daily_water": 317.29,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE049": {
+    "electricity": {
+      "AC": 20.2,
+      "Refrigerator": 16.6,
+      "Washing Machine": 5.3,
+      "Lights": 43.1,
+      "Other": 14.8
+    },
+    "water": {
+      "Water Heater": 23.8,
+      "Washing Machine": 10.5,
+      "Bathroom": 54.0,
+      "Kitchen": 11.7
+    },
+    "avg_daily_elec": 6.16,
+    "avg_daily_water": 376.53,
+    "profile": "lights_heavy"
+  },
+  "HOUSE050": {
+    "electricity": {
+      "AC": 22.8,
+      "Refrigerator": 13.2,
+      "Washing Machine": 41.4,
+      "Lights": 12.1,
+      "Other": 10.5
+    },
+    "water": {
+      "Water Heater": 25.0,
+      "Washing Machine": 11.9,
+      "Bathroom": 24.8,
+      "Kitchen": 38.3
+    },
+    "avg_daily_elec": 21.27,
+    "avg_daily_water": 454.59,
+    "profile": "washer_heavy"
+  },
+  "HOUSE051": {
+    "electricity": {
+      "AC": 50.0,
+      "Refrigerator": 14.1,
+      "Washing Machine": 8.9,
+      "Lights": 6.8,
+      "Other": 20.2
+    },
+    "water": {
+      "Water Heater": 45.4,
+      "Washing Machine": 15.7,
+      "Bathroom": 27.5,
+      "Kitchen": 11.4
+    },
+    "avg_daily_elec": 20.49,
+    "avg_daily_water": 462.56,
+    "profile": "heavy_ac"
+  },
+  "HOUSE052": {
+    "electricity": {
+      "AC": 28.7,
+      "Refrigerator": 25.4,
+      "Washing Machine": 15.6,
+      "Lights": 18.5,
+      "Other": 11.8
+    },
+    "water": {
+      "Water Heater": 29.0,
+      "Washing Machine": 20.4,
+      "Bathroom": 31.8,
+      "Kitchen": 18.8
+    },
+    "avg_daily_elec": 21.78,
+    "avg_daily_water": 289.55,
+    "profile": "all_rounder"
+  },
+  "HOUSE053": {
+    "electricity": {
+      "AC": 19.7,
+      "Refrigerator": 40.9,
+      "Washing Machine": 12.7,
+      "Lights": 13.4,
+      "Other": 13.3
+    },
+    "water": {
+      "Water Heater": 17.9,
+      "Washing Machine": 11.2,
+      "Bathroom": 51.5,
+      "Kitchen": 19.5
+    },
+    "avg_daily_elec": 25.19,
+    "avg_daily_water": 289.6,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE054": {
+    "electricity": {
+      "AC": 18.6,
+      "Refrigerator": 13.9,
+      "Washing Machine": 11.4,
+      "Lights": 49.3,
+      "Other": 6.7
+    },
+    "water": {
+      "Water Heater": 21.6,
+      "Washing Machine": 12.4,
+      "Bathroom": 26.6,
+      "Kitchen": 39.4
+    },
+    "avg_daily_elec": 12.28,
+    "avg_daily_water": 438.61,
+    "profile": "lights_heavy"
+  },
+  "HOUSE055": {
+    "electricity": {
+      "AC": 25.6,
+      "Refrigerator": 17.2,
+      "Washing Machine": 36.5,
+      "Lights": 6.3,
+      "Other": 14.4
+    },
+    "water": {
+      "Water Heater": 49.6,
+      "Washing Machine": 14.6,
+      "Bathroom": 23.2,
+      "Kitchen": 12.6
+    },
+    "avg_daily_elec": 16.73,
+    "avg_daily_water": 318.59,
+    "profile": "washer_heavy"
+  },
+  "HOUSE056": {
+    "electricity": {
+      "AC": 53.1,
+      "Refrigerator": 13.7,
+      "Washing Machine": 5.7,
+      "Lights": 10.2,
+      "Other": 17.3
+    },
+    "water": {
+      "Water Heater": 25.4,
+      "Washing Machine": 30.0,
+      "Bathroom": 29.2,
+      "Kitchen": 15.4
+    },
+    "avg_daily_elec": 13.58,
+    "avg_daily_water": 223.7,
+    "profile": "heavy_ac"
+  },
+  "HOUSE057": {
+    "electricity": {
+      "AC": 20.8,
+      "Refrigerator": 23.4,
+      "Washing Machine": 19.4,
+      "Lights": 16.3,
+      "Other": 20.1
+    },
+    "water": {
+      "Water Heater": 23.0,
+      "Washing Machine": 14.3,
+      "Bathroom": 52.2,
+      "Kitchen": 10.5
+    },
+    "avg_daily_elec": 21.8,
+    "avg_daily_water": 491.19,
+    "profile": "all_rounder"
+  },
+  "HOUSE058": {
+    "electricity": {
+      "AC": 17.9,
+      "Refrigerator": 36.4,
+      "Washing Machine": 15.3,
+      "Lights": 11.6,
+      "Other": 18.8
+    },
+    "water": {
+      "Water Heater": 21.0,
+      "Washing Machine": 11.8,
+      "Bathroom": 25.0,
+      "Kitchen": 42.2
+    },
+    "avg_daily_elec": 10.6,
+    "avg_daily_water": 447.86,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE059": {
+    "electricity": {
+      "AC": 24.2,
+      "Refrigerator": 16.7,
+      "Washing Machine": 7.0,
+      "Lights": 38.3,
+      "Other": 13.8
+    },
+    "water": {
+      "Water Heater": 43.0,
+      "Washing Machine": 13.2,
+      "Bathroom": 28.8,
+      "Kitchen": 15.0
+    },
+    "avg_daily_elec": 14.65,
+    "avg_daily_water": 257.23,
+    "profile": "lights_heavy"
+  },
+  "HOUSE060": {
+    "electricity": {
+      "AC": 24.0,
+      "Refrigerator": 17.5,
+      "Washing Machine": 43.8,
+      "Lights": 7.4,
+      "Other": 7.3
+    },
+    "water": {
+      "Water Heater": 22.6,
+      "Washing Machine": 27.9,
+      "Bathroom": 32.2,
+      "Kitchen": 17.2
+    },
+    "avg_daily_elec": 24.19,
+    "avg_daily_water": 200.64,
+    "profile": "washer_heavy"
+  },
+  "HOUSE061": {
+    "electricity": {
+      "AC": 56.2,
+      "Refrigerator": 13.8,
+      "Washing Machine": 7.9,
+      "Lights": 9.3,
+      "Other": 12.8
+    },
+    "water": {
+      "Water Heater": 16.7,
+      "Washing Machine": 18.5,
+      "Bathroom": 46.2,
+      "Kitchen": 18.7
+    },
+    "avg_daily_elec": 10.68,
+    "avg_daily_water": 268.16,
+    "profile": "heavy_ac"
+  },
+  "HOUSE062": {
+    "electricity": {
+      "AC": 27.6,
+      "Refrigerator": 18.5,
+      "Washing Machine": 14.3,
+      "Lights": 20.2,
+      "Other": 19.4
+    },
+    "water": {
+      "Water Heater": 26.2,
+      "Washing Machine": 11.5,
+      "Bathroom": 23.2,
+      "Kitchen": 39.0
+    },
+    "avg_daily_elec": 25.42,
+    "avg_daily_water": 237.71,
+    "profile": "all_rounder"
+  },
+  "HOUSE063": {
+    "electricity": {
+      "AC": 13.4,
+      "Refrigerator": 50.1,
+      "Washing Machine": 11.6,
+      "Lights": 12.1,
+      "Other": 12.8
+    },
+    "water": {
+      "Water Heater": 48.6,
+      "Washing Machine": 13.9,
+      "Bathroom": 25.8,
+      "Kitchen": 11.7
+    },
+    "avg_daily_elec": 21.95,
+    "avg_daily_water": 291.57,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE064": {
+    "electricity": {
+      "AC": 22.2,
+      "Refrigerator": 14.0,
+      "Washing Machine": 9.9,
+      "Lights": 47.6,
+      "Other": 6.4
+    },
+    "water": {
+      "Water Heater": 25.9,
+      "Washing Machine": 21.2,
+      "Bathroom": 28.0,
+      "Kitchen": 24.9
+    },
+    "avg_daily_elec": 20.38,
+    "avg_daily_water": 423.55,
+    "profile": "lights_heavy"
+  },
+  "HOUSE065": {
+    "electricity": {
+      "AC": 27.7,
+      "Refrigerator": 12.9,
+      "Washing Machine": 38.1,
+      "Lights": 10.0,
+      "Other": 11.3
+    },
+    "water": {
+      "Water Heater": 18.1,
+      "Washing Machine": 19.4,
+      "Bathroom": 51.9,
+      "Kitchen": 10.7
+    },
+    "avg_daily_elec": 5.78,
+    "avg_daily_water": 353.32,
+    "profile": "washer_heavy"
+  },
+  "HOUSE066": {
+    "electricity": {
+      "AC": 50.6,
+      "Refrigerator": 14.7,
+      "Washing Machine": 8.2,
+      "Lights": 8.7,
+      "Other": 17.9
+    },
+    "water": {
+      "Water Heater": 25.6,
+      "Washing Machine": 13.4,
+      "Bathroom": 24.1,
+      "Kitchen": 36.9
+    },
+    "avg_daily_elec": 19.15,
+    "avg_daily_water": 506.94,
+    "profile": "heavy_ac"
+  },
+  "HOUSE067": {
+    "electricity": {
+      "AC": 24.9,
+      "Refrigerator": 16.5,
+      "Washing Machine": 15.1,
+      "Lights": 25.5,
+      "Other": 18.0
+    },
+    "water": {
+      "Water Heater": 53.5,
+      "Washing Machine": 11.0,
+      "Bathroom": 22.1,
+      "Kitchen": 13.4
+    },
+    "avg_daily_elec": 9.67,
+    "avg_daily_water": 418.56,
+    "profile": "all_rounder"
+  },
+  "HOUSE068": {
+    "electricity": {
+      "AC": 16.2,
+      "Refrigerator": 36.1,
+      "Washing Machine": 15.4,
+      "Lights": 11.6,
+      "Other": 20.8
+    },
+    "water": {
+      "Water Heater": 24.8,
+      "Washing Machine": 20.9,
+      "Bathroom": 34.3,
+      "Kitchen": 20.0
+    },
+    "avg_daily_elec": 11.64,
+    "avg_daily_water": 367.08,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE069": {
+    "electricity": {
+      "AC": 25.5,
+      "Refrigerator": 13.4,
+      "Washing Machine": 5.9,
+      "Lights": 40.3,
+      "Other": 14.9
+    },
+    "water": {
+      "Water Heater": 17.6,
+      "Washing Machine": 11.6,
+      "Bathroom": 51.4,
+      "Kitchen": 19.4
+    },
+    "avg_daily_elec": 25.72,
+    "avg_daily_water": 156.81,
+    "profile": "lights_heavy"
+  },
+  "HOUSE070": {
+    "electricity": {
+      "AC": 23.9,
+      "Refrigerator": 15.5,
+      "Washing Machine": 35.9,
+      "Lights": 11.0,
+      "Other": 13.6
+    },
+    "water": {
+      "Water Heater": 23.5,
+      "Washing Machine": 13.8,
+      "Bathroom": 27.2,
+      "Kitchen": 35.5
+    },
+    "avg_daily_elec": 11.75,
+    "avg_daily_water": 341.13,
+    "profile": "washer_heavy"
+  },
+  "HOUSE071": {
+    "electricity": {
+      "AC": 48.2,
+      "Refrigerator": 14.8,
+      "Washing Machine": 9.2,
+      "Lights": 9.3,
+      "Other": 18.5
+    },
+    "water": {
+      "Water Heater": 44.9,
+      "Washing Machine": 11.2,
+      "Bathroom": 24.2,
+      "Kitchen": 19.6
+    },
+    "avg_daily_elec": 23.66,
+    "avg_daily_water": 518.43,
+    "profile": "heavy_ac"
+  },
+  "HOUSE072": {
+    "electricity": {
+      "AC": 27.6,
+      "Refrigerator": 22.5,
+      "Washing Machine": 16.0,
+      "Lights": 22.8,
+      "Other": 11.1
+    },
+    "water": {
+      "Water Heater": 27.0,
+      "Washing Machine": 25.7,
+      "Bathroom": 28.6,
+      "Kitchen": 18.7
+    },
+    "avg_daily_elec": 11.0,
+    "avg_daily_water": 249.28,
+    "profile": "all_rounder"
+  },
+  "HOUSE073": {
+    "electricity": {
+      "AC": 12.5,
+      "Refrigerator": 38.5,
+      "Washing Machine": 13.4,
+      "Lights": 20.6,
+      "Other": 15.0
+    },
+    "water": {
+      "Water Heater": 21.7,
+      "Washing Machine": 18.4,
+      "Bathroom": 43.5,
+      "Kitchen": 16.5
+    },
+    "avg_daily_elec": 10.64,
+    "avg_daily_water": 501.21,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE074": {
+    "electricity": {
+      "AC": 22.4,
+      "Refrigerator": 13.3,
+      "Washing Machine": 7.1,
+      "Lights": 46.5,
+      "Other": 10.7
+    },
+    "water": {
+      "Water Heater": 26.4,
+      "Washing Machine": 9.4,
+      "Bathroom": 21.4,
+      "Kitchen": 42.8
+    },
+    "avg_daily_elec": 11.54,
+    "avg_daily_water": 173.55,
+    "profile": "lights_heavy"
+  },
+  "HOUSE075": {
+    "electricity": {
+      "AC": 26.3,
+      "Refrigerator": 10.9,
+      "Washing Machine": 41.4,
+      "Lights": 12.9,
+      "Other": 8.5
+    },
+    "water": {
+      "Water Heater": 48.8,
+      "Washing Machine": 12.8,
+      "Bathroom": 25.2,
+      "Kitchen": 13.2
+    },
+    "avg_daily_elec": 10.78,
+    "avg_daily_water": 380.49,
+    "profile": "washer_heavy"
+  },
+  "HOUSE076": {
+    "electricity": {
+      "AC": 53.8,
+      "Refrigerator": 13.8,
+      "Washing Machine": 7.2,
+      "Lights": 10.8,
+      "Other": 14.3
+    },
+    "water": {
+      "Water Heater": 21.6,
+      "Washing Machine": 27.3,
+      "Bathroom": 27.0,
+      "Kitchen": 24.1
+    },
+    "avg_daily_elec": 15.86,
+    "avg_daily_water": 275.9,
+    "profile": "heavy_ac"
+  },
+  "HOUSE077": {
+    "electricity": {
+      "AC": 30.2,
+      "Refrigerator": 26.1,
+      "Washing Machine": 11.4,
+      "Lights": 18.0,
+      "Other": 14.3
+    },
+    "water": {
+      "Water Heater": 20.0,
+      "Washing Machine": 15.8,
+      "Bathroom": 47.9,
+      "Kitchen": 16.4
+    },
+    "avg_daily_elec": 13.58,
+    "avg_daily_water": 357.11,
+    "profile": "all_rounder"
+  },
+  "HOUSE078": {
+    "electricity": {
+      "AC": 12.0,
+      "Refrigerator": 34.8,
+      "Washing Machine": 15.2,
+      "Lights": 18.2,
+      "Other": 19.8
+    },
+    "water": {
+      "Water Heater": 25.9,
+      "Washing Machine": 13.7,
+      "Bathroom": 22.0,
+      "Kitchen": 38.4
+    },
+    "avg_daily_elec": 25.9,
+    "avg_daily_water": 449.55,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE079": {
+    "electricity": {
+      "AC": 22.1,
+      "Refrigerator": 16.0,
+      "Washing Machine": 6.8,
+      "Lights": 47.9,
+      "Other": 7.3
+    },
+    "water": {
+      "Water Heater": 40.7,
+      "Washing Machine": 11.2,
+      "Bathroom": 27.9,
+      "Kitchen": 20.2
+    },
+    "avg_daily_elec": 19.65,
+    "avg_daily_water": 401.19,
+    "profile": "lights_heavy"
+  },
+  "HOUSE080": {
+    "electricity": {
+      "AC": 25.5,
+      "Refrigerator": 15.6,
+      "Washing Machine": 37.8,
+      "Lights": 12.8,
+      "Other": 8.2
+    },
+    "water": {
+      "Water Heater": 23.9,
+      "Washing Machine": 24.3,
+      "Bathroom": 28.2,
+      "Kitchen": 23.6
+    },
+    "avg_daily_elec": 18.66,
+    "avg_daily_water": 435.45,
+    "profile": "washer_heavy"
+  },
+  "HOUSE081": {
+    "electricity": {
+      "AC": 47.6,
+      "Refrigerator": 15.5,
+      "Washing Machine": 7.5,
+      "Lights": 8.8,
+      "Other": 20.6
+    },
+    "water": {
+      "Water Heater": 21.7,
+      "Washing Machine": 15.0,
+      "Bathroom": 51.2,
+      "Kitchen": 12.1
+    },
+    "avg_daily_elec": 12.22,
+    "avg_daily_water": 253.5,
+    "profile": "heavy_ac"
+  },
+  "HOUSE082": {
+    "electricity": {
+      "AC": 24.5,
+      "Refrigerator": 23.2,
+      "Washing Machine": 16.1,
+      "Lights": 19.2,
+      "Other": 17.0
+    },
+    "water": {
+      "Water Heater": 25.0,
+      "Washing Machine": 11.0,
+      "Bathroom": 26.2,
+      "Kitchen": 37.8
+    },
+    "avg_daily_elec": 6.07,
+    "avg_daily_water": 431.52,
+    "profile": "all_rounder"
+  },
+  "HOUSE083": {
+    "electricity": {
+      "AC": 15.0,
+      "Refrigerator": 39.7,
+      "Washing Machine": 13.8,
+      "Lights": 20.0,
+      "Other": 11.4
+    },
+    "water": {
+      "Water Heater": 51.3,
+      "Washing Machine": 14.2,
+      "Bathroom": 23.6,
+      "Kitchen": 10.9
+    },
+    "avg_daily_elec": 25.14,
+    "avg_daily_water": 373.82,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE084": {
+    "electricity": {
+      "AC": 17.5,
+      "Refrigerator": 20.5,
+      "Washing Machine": 9.4,
+      "Lights": 44.8,
+      "Other": 7.9
+    },
+    "water": {
+      "Water Heater": 20.5,
+      "Washing Machine": 27.7,
+      "Bathroom": 26.5,
+      "Kitchen": 25.3
+    },
+    "avg_daily_elec": 8.58,
+    "avg_daily_water": 274.77,
+    "profile": "lights_heavy"
+  },
+  "HOUSE085": {
+    "electricity": {
+      "AC": 23.6,
+      "Refrigerator": 17.2,
+      "Washing Machine": 36.6,
+      "Lights": 9.1,
+      "Other": 13.5
+    },
+    "water": {
+      "Water Heater": 16.2,
+      "Washing Machine": 14.4,
+      "Bathroom": 51.0,
+      "Kitchen": 18.4
+    },
+    "avg_daily_elec": 12.96,
+    "avg_daily_water": 289.39,
+    "profile": "washer_heavy"
+  },
+  "HOUSE086": {
+    "electricity": {
+      "AC": 54.0,
+      "Refrigerator": 14.1,
+      "Washing Machine": 5.8,
+      "Lights": 7.7,
+      "Other": 18.4
+    },
+    "water": {
+      "Water Heater": 24.5,
+      "Washing Machine": 10.0,
+      "Bathroom": 19.1,
+      "Kitchen": 46.4
+    },
+    "avg_daily_elec": 15.14,
+    "avg_daily_water": 474.89,
+    "profile": "heavy_ac"
+  },
+  "HOUSE087": {
+    "electricity": {
+      "AC": 29.9,
+      "Refrigerator": 17.4,
+      "Washing Machine": 18.1,
+      "Lights": 18.5,
+      "Other": 16.1
+    },
+    "water": {
+      "Water Heater": 51.5,
+      "Washing Machine": 14.6,
+      "Bathroom": 19.9,
+      "Kitchen": 14.0
+    },
+    "avg_daily_elec": 8.13,
+    "avg_daily_water": 323.31,
+    "profile": "all_rounder"
+  },
+  "HOUSE088": {
+    "electricity": {
+      "AC": 13.8,
+      "Refrigerator": 37.1,
+      "Washing Machine": 13.7,
+      "Lights": 19.3,
+      "Other": 16.1
+    },
+    "water": {
+      "Water Heater": 27.4,
+      "Washing Machine": 22.2,
+      "Bathroom": 26.9,
+      "Kitchen": 23.5
+    },
+    "avg_daily_elec": 21.75,
+    "avg_daily_water": 151.31,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE089": {
+    "electricity": {
+      "AC": 21.1,
+      "Refrigerator": 13.9,
+      "Washing Machine": 10.0,
+      "Lights": 47.1,
+      "Other": 8.0
+    },
+    "water": {
+      "Water Heater": 19.8,
+      "Washing Machine": 16.7,
+      "Bathroom": 49.9,
+      "Kitchen": 13.6
+    },
+    "avg_daily_elec": 14.22,
+    "avg_daily_water": 418.3,
+    "profile": "lights_heavy"
+  },
+  "HOUSE090": {
+    "electricity": {
+      "AC": 25.7,
+      "Refrigerator": 15.8,
+      "Washing Machine": 40.4,
+      "Lights": 10.4,
+      "Other": 7.7
+    },
+    "water": {
+      "Water Heater": 21.6,
+      "Washing Machine": 15.0,
+      "Bathroom": 26.7,
+      "Kitchen": 36.7
+    },
+    "avg_daily_elec": 12.64,
+    "avg_daily_water": 500.06,
+    "profile": "washer_heavy"
+  },
+  "HOUSE091": {
+    "electricity": {
+      "AC": 56.9,
+      "Refrigerator": 15.5,
+      "Washing Machine": 8.0,
+      "Lights": 8.3,
+      "Other": 11.3
+    },
+    "water": {
+      "Water Heater": 46.8,
+      "Washing Machine": 15.9,
+      "Bathroom": 24.9,
+      "Kitchen": 12.4
+    },
+    "avg_daily_elec": 10.56,
+    "avg_daily_water": 469.79,
+    "profile": "heavy_ac"
+  },
+  "HOUSE092": {
+    "electricity": {
+      "AC": 26.1,
+      "Refrigerator": 26.9,
+      "Washing Machine": 11.3,
+      "Lights": 18.8,
+      "Other": 17.0
+    },
+    "water": {
+      "Water Heater": 27.4,
+      "Washing Machine": 23.4,
+      "Bathroom": 28.9,
+      "Kitchen": 20.4
+    },
+    "avg_daily_elec": 8.57,
+    "avg_daily_water": 474.18,
+    "profile": "all_rounder"
+  },
+  "HOUSE093": {
+    "electricity": {
+      "AC": 19.1,
+      "Refrigerator": 40.6,
+      "Washing Machine": 11.3,
+      "Lights": 16.9,
+      "Other": 12.0
+    },
+    "water": {
+      "Water Heater": 21.6,
+      "Washing Machine": 10.7,
+      "Bathroom": 51.6,
+      "Kitchen": 16.2
+    },
+    "avg_daily_elec": 9.19,
+    "avg_daily_water": 399.56,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE094": {
+    "electricity": {
+      "AC": 24.0,
+      "Refrigerator": 13.6,
+      "Washing Machine": 5.8,
+      "Lights": 50.1,
+      "Other": 6.4
+    },
+    "water": {
+      "Water Heater": 23.8,
+      "Washing Machine": 12.1,
+      "Bathroom": 25.4,
+      "Kitchen": 38.7
+    },
+    "avg_daily_elec": 17.37,
+    "avg_daily_water": 180.53,
+    "profile": "lights_heavy"
+  },
+  "HOUSE095": {
+    "electricity": {
+      "AC": 23.8,
+      "Refrigerator": 14.5,
+      "Washing Machine": 46.9,
+      "Lights": 6.1,
+      "Other": 8.7
+    },
+    "water": {
+      "Water Heater": 42.9,
+      "Washing Machine": 15.1,
+      "Bathroom": 27.2,
+      "Kitchen": 14.7
+    },
+    "avg_daily_elec": 9.15,
+    "avg_daily_water": 175.78,
+    "profile": "washer_heavy"
+  },
+  "HOUSE096": {
+    "electricity": {
+      "AC": 52.0,
+      "Refrigerator": 14.0,
+      "Washing Machine": 5.9,
+      "Lights": 10.3,
+      "Other": 17.8
+    },
+    "water": {
+      "Water Heater": 21.1,
+      "Washing Machine": 27.0,
+      "Bathroom": 28.5,
+      "Kitchen": 23.4
+    },
+    "avg_daily_elec": 5.87,
+    "avg_daily_water": 410.78,
+    "profile": "heavy_ac"
+  },
+  "HOUSE097": {
+    "electricity": {
+      "AC": 28.9,
+      "Refrigerator": 17.7,
+      "Washing Machine": 16.0,
+      "Lights": 16.7,
+      "Other": 20.6
+    },
+    "water": {
+      "Water Heater": 18.6,
+      "Washing Machine": 16.9,
+      "Bathroom": 49.2,
+      "Kitchen": 15.4
+    },
+    "avg_daily_elec": 22.13,
+    "avg_daily_water": 400.06,
+    "profile": "all_rounder"
+  },
+  "HOUSE098": {
+    "electricity": {
+      "AC": 18.4,
+      "Refrigerator": 38.0,
+      "Washing Machine": 15.9,
+      "Lights": 12.6,
+      "Other": 15.2
+    },
+    "water": {
+      "Water Heater": 22.9,
+      "Washing Machine": 12.2,
+      "Bathroom": 23.2,
+      "Kitchen": 41.7
+    },
+    "avg_daily_elec": 25.9,
+    "avg_daily_water": 141.95,
+    "profile": "fridge_heavy"
+  },
+  "HOUSE099": {
+    "electricity": {
+      "AC": 24.0,
+      "Refrigerator": 14.7,
+      "Washing Machine": 5.6,
+      "Lights": 42.2,
+      "Other": 13.5
+    },
+    "water": {
+      "Water Heater": 53.9,
+      "Washing Machine": 13.7,
+      "Bathroom": 21.6,
+      "Kitchen": 10.9
+    },
+    "avg_daily_elec": 18.05,
+    "avg_daily_water": 225.13,
+    "profile": "lights_heavy"
+  },
+  "HOUSE100": {
+    "electricity": {
+      "AC": 22.5,
+      "Refrigerator": 14.2,
+      "Washing Machine": 40.2,
+      "Lights": 12.4,
+      "Other": 10.8
+    },
+    "water": {
+      "Water Heater": 20.8,
+      "Washing Machine": 29.5,
+      "Bathroom": 34.4,
+      "Kitchen": 15.3
+    },
+    "avg_daily_elec": 10.53,
+    "avg_daily_water": 215.27,
+    "profile": "washer_heavy"
+  },
+  "HOUSE101": {
+    "electricity": {
+      "AC": 49.9,
+      "Refrigerator": 13.6,
+      "Washing Machine": 9.4,
+      "Lights": 8.5,
+      "Other": 18.7
+    },
+    "water": {
+      "Water Heater": 24.1,
+      "Washing Machine": 12.1,
+      "Bathroom": 50.1,
+      "Kitchen": 13.7
+    },
+    "avg_daily_elec": 11.95,
+    "avg_daily_water": 335.85,
+    "profile": "heavy_ac"
+  }
+}
