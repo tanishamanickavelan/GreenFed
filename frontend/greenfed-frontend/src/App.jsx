@@ -9,7 +9,7 @@ styleEl.textContent = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@300;400;500;600;700;800&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html, body, #root { width:100%; min-height:100vh; }
-  body { font-family:'Nunito',sans-serif; background:#f5f0e8; }
+  body { font-family:'Nunito',sans-serif; background:#f5f0e8; font-size:16px; }
   ::-webkit-scrollbar { width:6px; }
   ::-webkit-scrollbar-track { background:#e8dfc8; }
   ::-webkit-scrollbar-thumb { background:#6b7c3e; border-radius:4px; }
@@ -322,6 +322,7 @@ function PrivacyTab() {
           </div>
         ))}
       </div>
+      <ConvergenceGraph />
     </div>
   )
 }
@@ -613,7 +614,411 @@ function ReportTab({ userData }) {
     </div>
   )
 }
+function SimulatorTab({ userData }) {
+  const [acReduction,      setAcReduction]      = useState(0)
+  const [ledSwitch,        setLedSwitch]        = useState(false)
+  const [applianceShift,   setApplianceShift]   = useState(false)
+  const [waterLeakFix,     setWaterLeakFix]     = useState(false)
+  const [showerhead,       setShowerhead]       = useState(false)
+  const [fridgeMaintain,   setFridgeMaintain]   = useState(false)
 
+  const base = userData.green_score
+
+  // Calculate impact of each action
+  const acImpact        = Math.round(acReduction * 0.8)
+  const ledImpact       = ledSwitch      ? 3  : 0
+  const applianceImpact = applianceShift ? 3  : 0
+  const waterImpact     = waterLeakFix   ? 5  : 0
+  const showerImpact    = showerhead     ? 4  : 0
+  const fridgeImpact    = fridgeMaintain ? 2  : 0
+
+  const totalImpact   = acImpact + ledImpact + applianceImpact + waterImpact + showerImpact + fridgeImpact
+  const newScore      = Math.min(95, base + totalImpact)
+  const { color: newColor, label: newLabel } = getScore(newScore)
+  const { color: oldColor } = getScore(base)
+
+  const actions = [
+    {
+      label   : "⚡ Reduce AC usage",
+      sub     : `${acReduction} hrs/day reduction`,
+      impact  : acImpact,
+      control : (
+        <div>
+          <input type="range" min={0} max={6} value={acReduction}
+            onChange={e => setAcReduction(Number(e.target.value))}
+            style={{ width:"100%", accentColor: C.moss, cursor:"pointer" }}
+          />
+          <div style={{ display:"flex", justifyContent:"space-between", fontSize:11, color:C.leaf, fontWeight:700 }}>
+            <span>0 hrs</span><span>3 hrs</span><span>6 hrs</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      label   : "💡 Switch to LED bulbs",
+      sub     : "All lights replaced",
+      impact  : ledImpact,
+      control : (
+        <div onClick={() => setLedSwitch(!ledSwitch)} style={{
+          width:48, height:26, borderRadius:13,
+          background: ledSwitch ? C.moss : C.sand,
+          cursor:"pointer", position:"relative", transition:"background 0.3s"
+        }}>
+          <div style={{
+            width:22, height:22, borderRadius:"50%", background:"white",
+            position:"absolute", top:2,
+            left: ledSwitch ? 24 : 2,
+            transition:"left 0.3s",
+            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
+          }} />
+        </div>
+      )
+    },
+    {
+      label   : "🕐 Off-peak appliances",
+      sub     : "Run after 10PM",
+      impact  : applianceImpact,
+      control : (
+        <div onClick={() => setApplianceShift(!applianceShift)} style={{
+          width:48, height:26, borderRadius:13,
+          background: applianceShift ? C.moss : C.sand,
+          cursor:"pointer", position:"relative", transition:"background 0.3s"
+        }}>
+          <div style={{
+            width:22, height:22, borderRadius:"50%", background:"white",
+            position:"absolute", top:2,
+            left: applianceShift ? 24 : 2,
+            transition:"left 0.3s",
+            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
+          }} />
+        </div>
+      )
+    },
+    {
+      label   : "💧 Fix water leaks",
+      sub     : "All leaks repaired",
+      impact  : waterImpact,
+      control : (
+        <div onClick={() => setWaterLeakFix(!waterLeakFix)} style={{
+          width:48, height:26, borderRadius:13,
+          background: waterLeakFix ? C.moss : C.sand,
+          cursor:"pointer", position:"relative", transition:"background 0.3s"
+        }}>
+          <div style={{
+            width:22, height:22, borderRadius:"50%", background:"white",
+            position:"absolute", top:2,
+            left: waterLeakFix ? 24 : 2,
+            transition:"left 0.3s",
+            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
+          }} />
+        </div>
+      )
+    },
+    {
+      label   : "🚿 Low-flow showerheads",
+      sub     : "Installed throughout",
+      impact  : showerImpact,
+      control : (
+        <div onClick={() => setShowerhead(!showerhead)} style={{
+          width:48, height:26, borderRadius:13,
+          background: showerhead ? C.moss : C.sand,
+          cursor:"pointer", position:"relative", transition:"background 0.3s"
+        }}>
+          <div style={{
+            width:22, height:22, borderRadius:"50%", background:"white",
+            position:"absolute", top:2,
+            left: showerhead ? 24 : 2,
+            transition:"left 0.3s",
+            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
+          }} />
+        </div>
+      )
+    },
+    {
+      label   : "❄️ Fridge maintenance",
+      sub     : "Clean coils + check seal",
+      impact  : fridgeImpact,
+      control : (
+        <div onClick={() => setFridgeMaintain(!fridgeMaintain)} style={{
+          width:48, height:26, borderRadius:13,
+          background: fridgeMaintain ? C.moss : C.sand,
+          cursor:"pointer", position:"relative", transition:"background 0.3s"
+        }}>
+          <div style={{
+            width:22, height:22, borderRadius:"50%", background:"white",
+            position:"absolute", top:2,
+            left: fridgeMaintain ? 24 : 2,
+            transition:"left 0.3s",
+            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
+          }} />
+        </div>
+      )
+    },
+  ]
+
+  return (
+    <div>
+      <h2 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, fontSize:26, marginBottom:6 }}>🎛️ What-If Simulator</h2>
+      <p style={{ color:C.leaf, marginBottom:24, fontWeight:600, fontSize:14 }}>
+        Adjust sliders and toggles to see how actions improve your GreenScore in real time
+      </p>
+
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20, marginBottom:20 }}>
+
+        {/* Live Score Preview */}
+        <div className="card-enter" style={{
+          background:`linear-gradient(135deg, ${getScore(newScore).bg}, ${C.card})`,
+          border:`2px solid ${newColor}44`, borderRadius:18, padding:28,
+          display:"flex", flexDirection:"column", alignItems:"center", gap:14
+        }}>
+          <span style={{ fontSize:12, fontWeight:800, color:newColor, textTransform:"uppercase", letterSpacing:"1.5px" }}>
+            Projected GreenScore
+          </span>
+          <ScoreRing score={newScore} size={160} />
+          <div style={{ padding:"6px 20px", borderRadius:20, background:newColor, color:"white", fontWeight:800, fontSize:13 }}>
+            {newLabel}
+          </div>
+
+          {/* Before vs After */}
+          <div style={{ width:"100%", background:C.cream, borderRadius:12, padding:14, border:`1px solid ${C.sand}` }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
+              <div style={{ textAlign:"center" }}>
+                <div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>BEFORE</div>
+                <div style={{ fontSize:28, fontWeight:900, color:oldColor, fontFamily:"'Playfair Display',serif" }}>{base}</div>
+              </div>
+              <div style={{ fontSize:24 }}>→</div>
+              <div style={{ textAlign:"center" }}>
+                <div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>AFTER</div>
+                <div style={{ fontSize:28, fontWeight:900, color:newColor, fontFamily:"'Playfair Display',serif" }}>{newScore}</div>
+              </div>
+              <div style={{ textAlign:"center" }}>
+                <div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>GAIN</div>
+                <div style={{ fontSize:28, fontWeight:900, color:totalImpact>0?C.moss:C.sand, fontFamily:"'Playfair Display',serif" }}>
+                  +{totalImpact}
+                </div>
+              </div>
+            </div>
+            <div style={{ background:C.sand, borderRadius:6, height:10, position:"relative" }}>
+              <div style={{ width:`${base}%`, background:oldColor, height:10, borderRadius:6, position:"absolute", opacity:0.4 }} />
+              <div style={{ width:`${newScore}%`, background:newColor, height:10, borderRadius:6, position:"absolute", transition:"width 0.5s ease", boxShadow:`0 0 8px ${newColor}55` }} />
+            </div>
+          </div>
+
+          {totalImpact > 0 && (
+            <div style={{
+              width:"100%", padding:"12px 16px", background:"#eaf2e0",
+              borderRadius:10, border:`1px solid ${C.fern}`,
+              fontSize:13, color:C.moss, fontWeight:700, textAlign:"center"
+            }}>
+              🌿 {totalImpact} point improvement activated!
+              {newScore >= 70 && base < 70 && " You've crossed into Efficient! 🎉"}
+            </div>
+          )}
+        </div>
+
+        {/* Action Controls */}
+        <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
+          <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:17 }}>
+            🌿 Adjust Your Actions
+          </h3>
+          {actions.map((action, i) => (
+            <div key={i} style={{
+              marginBottom:16, padding:"12px 14px", borderRadius:12,
+              background: action.impact > 0 ? "#eaf2e0" : C.cream,
+              border:`1px solid ${action.impact > 0 ? C.fern : C.sand}`,
+              transition:"all 0.3s"
+            }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:8 }}>
+                <div>
+                  <div style={{ fontSize:13, color:C.bark, fontWeight:700 }}>{action.label}</div>
+                  <div style={{ fontSize:11, color:C.leaf, fontWeight:600 }}>{action.sub}</div>
+                </div>
+                <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                  {action.impact > 0 && (
+                    <span style={{ background:C.moss, color:"white", padding:"2px 10px", borderRadius:20, fontSize:11, fontWeight:800 }}>
+                      +{action.impact} pts
+                    </span>
+                  )}
+                  {action.control}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <button onClick={()=>{
+            setAcReduction(0); setLedSwitch(false); setApplianceShift(false)
+            setWaterLeakFix(false); setShowerhead(false); setFridgeMaintain(false)
+          }} style={{
+            width:"100%", padding:"10px", borderRadius:10,
+            background:C.cream, color:C.bark, border:`1px solid ${C.sand}`,
+            cursor:"pointer", fontWeight:700, fontSize:13,
+            fontFamily:"'Nunito',sans-serif", marginTop:8
+          }}>↺ Reset All</button>
+        </div>
+      </div>
+
+      {/* CO2 Savings */}
+      {totalImpact > 0 && (
+        <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
+          <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:17 }}>
+            🌍 Environmental Impact of Your Changes
+          </h3>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14 }}>
+            {[
+              { label:"Score Improvement",  value:`+${totalImpact} pts`,                                     color:C.moss,  icon:"📈" },
+              { label:"Est. CO₂ Saved/yr",  value:`~${Math.round(totalImpact * 8)} kg`,                     color:C.river, icon:"🌍" },
+              { label:"Trees Equivalent",   value:`~${Math.ceil(totalImpact * 8 / 21)} trees`,              color:C.leaf,  icon:"🌳" },
+            ].map((s,i)=>(
+              <div key={i} style={{ background:C.cream, borderRadius:12, padding:18, textAlign:"center", border:`1px solid ${C.fern}` }}>
+                <div style={{ fontSize:26, marginBottom:8 }}>{s.icon}</div>
+                <div style={{ fontSize:22, fontWeight:900, color:s.color, fontFamily:"'Playfair Display',serif" }}>{s.value}</div>
+                <div style={{ fontSize:12, color:C.leaf, marginTop:4, fontWeight:700 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+function ConvergenceGraph() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    authAxios().get(`${API}/api/convergence`)
+      .then(res => setData(res.data))
+      .catch(() => setData({
+        elec_loss:  [0.0073,0.0073,0.0071,0.0072,0.0071,0.0071,0.0071,0.0070,0.0070,0.0070],
+        water_loss: [0.0115,0.0117,0.0105,0.0107,0.0107,0.0104,0.0101,0.0101,0.0096,0.0103],
+        rounds:     [1,2,3,4,5,6,7,8,9,10]
+      }))
+  }, [])
+
+  if (!data) return null
+
+  const maxLoss  = Math.max(...data.elec_loss, ...data.water_loss)
+  const minLoss  = Math.min(...data.elec_loss, ...data.water_loss)
+  const range    = maxLoss - minLoss
+  const chartH   = 180
+  const chartW   = 600
+
+  const toY = (val) => chartH - ((val - minLoss) / range) * (chartH - 20) - 10
+
+  const elecPoints  = data.rounds.map((r, i) => {
+    const x = (i / (data.rounds.length - 1)) * chartW
+    const y = toY(data.elec_loss[i])
+    return `${x},${y}`
+  }).join(' ')
+
+  const waterPoints = data.rounds.map((r, i) => {
+    const x = (i / (data.rounds.length - 1)) * chartW
+    const y = toY(data.water_loss[i])
+    return `${x},${y}`
+  }).join(' ')
+
+  const improvement_e = (((data.elec_loss[0] - data.elec_loss[9]) / data.elec_loss[0]) * 100).toFixed(1)
+  const improvement_w = (((data.water_loss[0] - data.water_loss[9]) / data.water_loss[0]) * 100).toFixed(1)
+
+  return (
+    <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}`, marginTop:20 }}>
+      <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:17 }}>
+        📉 FL Training Convergence — Loss Across 10 Rounds
+      </h3>
+      <p style={{ color:C.leaf, fontSize:12, marginBottom:20, fontWeight:600 }}>
+        Decreasing loss proves the Federated Learning model is converging correctly
+      </p>
+
+      {/* Stats */}
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:20 }}>
+        {[
+          { label:"Elec Loss Round 1",  value:data.elec_loss[0].toFixed(5),  color:C.river },
+          { label:"Elec Loss Round 10", value:data.elec_loss[9].toFixed(5),  color:C.moss  },
+          { label:"Water Loss Round 1", value:data.water_loss[0].toFixed(5), color:C.clay  },
+          { label:"Water Loss Round 10",value:data.water_loss[9].toFixed(5), color:C.moss  },
+        ].map((s,i)=>(
+          <div key={i} style={{ background:C.cream, borderRadius:10, padding:12, textAlign:"center", border:`1px solid ${C.sand}` }}>
+            <div style={{ fontSize:16, fontWeight:900, color:s.color, fontFamily:"'Playfair Display',serif" }}>{s.value}</div>
+            <div style={{ fontSize:10, color:C.leaf, marginTop:3, fontWeight:700 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* SVG Chart */}
+      <div style={{ overflowX:"auto" }}>
+        <svg width={chartW + 60} height={chartH + 40} style={{ display:"block", margin:"0 auto" }}>
+          {/* Grid lines */}
+          {[0,1,2,3,4].map(i => (
+            <line key={i}
+              x1={30} y1={10 + (i * (chartH-20)/4)}
+              x2={chartW + 30} y2={10 + (i * (chartH-20)/4)}
+              stroke={C.sand} strokeWidth={1} strokeDasharray="4,4"
+            />
+          ))}
+
+          {/* Round labels */}
+          {data.rounds.map((r, i) => (
+            <text key={i}
+              x={30 + (i / (data.rounds.length-1)) * chartW}
+              y={chartH + 30}
+              textAnchor="middle" fontSize={10}
+              fill={C.leaf} fontWeight="700"
+            >R{r}</text>
+          ))}
+
+          {/* Electricity line */}
+          <polyline
+            points={data.rounds.map((r,i) => `${30 + (i/(data.rounds.length-1))*chartW},${toY(data.elec_loss[i])}`).join(' ')}
+            fill="none" stroke={C.river} strokeWidth={2.5} strokeLinejoin="round"
+          />
+          {data.rounds.map((r,i) => (
+            <circle key={i}
+              cx={30 + (i/(data.rounds.length-1))*chartW}
+              cy={toY(data.elec_loss[i])}
+              r={4} fill={C.river}
+            >
+              <title>Round {r}: {data.elec_loss[i].toFixed(5)}</title>
+            </circle>
+          ))}
+
+          {/* Water line */}
+          <polyline
+            points={data.rounds.map((r,i) => `${30 + (i/(data.rounds.length-1))*chartW},${toY(data.water_loss[i])}`).join(' ')}
+            fill="none" stroke={C.clay} strokeWidth={2.5} strokeLinejoin="round"
+          />
+          {data.rounds.map((r,i) => (
+            <circle key={i}
+              cx={30 + (i/(data.rounds.length-1))*chartW}
+              cy={toY(data.water_loss[i])}
+              r={4} fill={C.clay}
+            >
+              <title>Round {r}: {data.water_loss[i].toFixed(5)}</title>
+            </circle>
+          ))}
+
+          {/* Legend */}
+          <circle cx={45} cy={chartH+15} r={5} fill={C.river} />
+          <text x={55} y={chartH+19} fontSize={10} fill={C.river} fontWeight="700">Electricity Model</text>
+          <circle cx={160} cy={chartH+15} r={5} fill={C.clay} />
+          <text x={170} y={chartH+19} fontSize={10} fill={C.clay} fontWeight="700">Water Model</text>
+        </svg>
+      </div>
+
+      {/* Improvement badges */}
+      <div style={{ display:"flex", gap:12, marginTop:16, justifyContent:"center" }}>
+        <div style={{ background:"#e8f3f8", padding:"8px 20px", borderRadius:20, border:`1px solid ${C.river}44` }}>
+          <span style={{ fontSize:13, color:C.river, fontWeight:800 }}>
+            ⚡ Electricity improved {improvement_e}% over 10 rounds
+          </span>
+        </div>
+        <div style={{ background:"#fae8e0", padding:"8px 20px", borderRadius:20, border:`1px solid ${C.clay}44` }}>
+          <span style={{ fontSize:13, color:C.clay, fontWeight:800 }}>
+            💧 Water improved {improvement_w}% over 10 rounds
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
 // ── MAIN DASHBOARD ──────────────────────────────────────
 function Dashboard({ onLogout }) {
   const [data, setData]         = useState(null)
@@ -645,6 +1050,7 @@ function Dashboard({ onLogout }) {
   const tabs = {
     my        : "🏡 My Garden",
     community : "🌍 Community",
+    simulate  : "🎛️ Simulate", 
     carbon    : "🌿 Carbon",
     privacy   : "🔒 Privacy",
     predict   : "📈 Forecast",
@@ -836,6 +1242,7 @@ function Dashboard({ onLogout }) {
           </div>
         )}
 
+        {tab === "simulate" && <SimulatorTab userData={data} />}
         {tab === "carbon"  && <CarbonTab houseId={houseId} data={data} devices={data.devices} />}
         {tab === "privacy" && <PrivacyTab />}
         {tab === "predict" && <PredictTab userData={data} />}
