@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import json, jwt, bcrypt, datetime, hashlib
+import json, jwt, bcrypt, datetime, hashlib, os
 
 app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True)
@@ -203,6 +203,9 @@ def admin_houses():
         })
     houses.sort(key=lambda x: x['green_score'], reverse=True)
     return jsonify(houses)
+
+# ── CONVERGENCE ──────────────────────────────────────────
+
 @app.route('/api/convergence')
 def get_convergence():
     try:
@@ -221,7 +224,6 @@ def get_convergence():
         })
 
 if __name__ == '__main__':
-    print("GreenFed API starting on http://localhost:5000")
-   import os
-port = int(os.environ.get("PORT", 5000))
-app.run(debug=False, host="0.0.0.0", port=port)
+    print("GreenFed API starting...")
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)

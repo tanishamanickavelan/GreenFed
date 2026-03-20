@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-const API = "http://localhost:5000"
+const API = "https://greenfed-production.up.railway.app"
 
 // Inject fonts + global styles
 const styleEl = document.createElement('style')
