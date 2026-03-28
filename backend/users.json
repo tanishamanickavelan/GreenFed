@@ -6,10 +6,12 @@
   "HOUSE002": {
     "password": "$2b$12$oUyCNcBJdXYEH4JhNVZfnOBRDDl9.AOBTfnxbugGdqqHfvj9/Ecre",
     "house_id": "HOUSE002"
+    
   },
   "HOUSE003": {
     "password": "$2b$12$T75RHpk35B0uuryoZZfoyeoE44jPkur7kN8hNQRGvPxR.BrE.fXiu",
     "house_id": "HOUSE003"
+    
   },
   "HOUSE004": {
     "password": "$2b$12$M1fm4UzdMiklBFCYTxQMy.NeCyGAIy7CpO8mi1F2hBPC0GOHXLX1e",

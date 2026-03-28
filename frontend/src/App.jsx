@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 const API = "http://localhost:5000"
 
@@ -19,6 +19,8 @@ styleEl.textContent = `
   @keyframes ringFill { from{stroke-dasharray:0 999} to{stroke-dasharray:var(--d) 999} }
   @keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:0.5} }
   @keyframes leafSway { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+  @keyframes botSlideIn { from{opacity:0;transform:translateY(24px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+  @keyframes dotBounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
 
   .card-enter { animation: fadeUp 0.5s ease both; }
   .scale-enter { animation: scaleIn 0.4s ease both; }
@@ -27,6 +29,15 @@ styleEl.textContent = `
   .row-hover { transition: transform 0.2s, box-shadow 0.2s; }
   .row-hover:hover { transform: translateX(5px); }
   .score-ring circle.fill { animation: ringFill 1.2s cubic-bezier(.4,0,.2,1) forwards; }
+
+  /* GreenBot */
+  .bot-panel { animation: botSlideIn 0.3s cubic-bezier(.34,1.56,.64,1) both; }
+  .bot-msg { animation: fadeUp 0.25s ease both; }
+  .typing-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#8fa660; margin:0 2px; animation:dotBounce 1.2s infinite ease-in-out; }
+  .typing-dot:nth-child(2){animation-delay:0.15s}
+  .typing-dot:nth-child(3){animation-delay:0.3s}
+  .bot-send:hover { background: #4a5e28 !important; }
+  .email-btn:hover { opacity:0.88; }
 `
 document.head.appendChild(styleEl)
 
@@ -64,30 +75,18 @@ function ScoreRing({ score, size = 160 }) {
   const r    = (size - 18) / 2
   const circ = 2 * Math.PI * r
   const fill = (score / 100) * circ
-
   return (
     <div style={{ position:"relative", width:size, height:size }}>
       <svg width={size} height={size} style={{ transform:"rotate(-90deg)" }}>
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={C.cream} strokeWidth={12} />
         <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth={12}
           strokeLinecap="round"
-          style={{
-            strokeDasharray: `${fill} ${circ}`,
-            transition: "stroke-dasharray 1.2s cubic-bezier(.4,0,.2,1)",
-            filter: `drop-shadow(0 0 8px ${color}88)`
-          }}
+          style={{ strokeDasharray:`${fill} ${circ}`, transition:"stroke-dasharray 1.2s cubic-bezier(.4,0,.2,1)", filter:`drop-shadow(0 0 8px ${color}88)` }}
         />
       </svg>
-      <div style={{
-        position:"absolute", inset:0,
-        display:"flex", flexDirection:"column",
-        alignItems:"center", justifyContent:"center"
-      }}>
-        <span style={{
-          fontSize: size / 3.2, fontWeight:900, color,
-          fontFamily:"'Playfair Display',serif", lineHeight:1
-        }}>{score}</span>
-        <span style={{ fontSize: size/10, color: C.bark, opacity:0.6, fontWeight:600 }}>/ 100</span>
+      <div style={{ position:"absolute", inset:0, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center" }}>
+        <span style={{ fontSize:size/3.2, fontWeight:900, color, fontFamily:"'Playfair Display',serif", lineHeight:1 }}>{score}</span>
+        <span style={{ fontSize:size/10, color:C.bark, opacity:0.6, fontWeight:600 }}>/ 100</span>
       </div>
     </div>
   )
@@ -95,32 +94,22 @@ function ScoreRing({ score, size = 160 }) {
 
 // ── DEVICE BAR ──────────────────────────────────────────
 function DeviceBar({ label, percent, color, delay = 0 }) {
-  const emoji = percent >= 40 ? "🔴" : percent >= 25 ? "🟠" : percent >= 15 ? "🟡" : "🟢"
+  const emoji    = percent >= 40 ? "🔴" : percent >= 25 ? "🟠" : percent >= 15 ? "🟡" : "🟢"
   const barColor = percent >= 40 ? C.clay : percent >= 25 ? "#c87941" : percent >= 15 ? C.sun : C.moss
-
   return (
-    <div className="row-hover" style={{
-      marginBottom:10, padding:"10px 14px", borderRadius:12,
-      background: C.cream, border:`1px solid ${C.border}`,
-      animationDelay:`${delay}s`
-    }}>
+    <div className="row-hover" style={{ marginBottom:10, padding:"10px 14px", borderRadius:12, background:C.cream, border:`1px solid ${C.border}`, animationDelay:`${delay}s` }}>
       <div style={{ display:"flex", justifyContent:"space-between", marginBottom:7 }}>
         <span style={{ fontSize:13, color:C.bark, fontWeight:700 }}>{emoji} {label}</span>
         <span style={{ fontSize:13, fontWeight:800, color:barColor, fontFamily:"'Playfair Display',serif" }}>{percent}%</span>
       </div>
       <div style={{ background:C.sand, borderRadius:6, height:8, overflow:"hidden" }}>
-        <div style={{
-          width:`${percent}%`, background:`linear-gradient(90deg, ${barColor}99, ${barColor})`,
-          height:8, borderRadius:6,
-          transition:"width 1s ease",
-          boxShadow:`0 0 6px ${barColor}55`
-        }} />
+        <div style={{ width:`${percent}%`, background:`linear-gradient(90deg, ${barColor}99, ${barColor})`, height:8, borderRadius:6, transition:"width 1s ease", boxShadow:`0 0 6px ${barColor}55` }} />
       </div>
     </div>
   )
 }
 
-// ── SUGGESTION ──────────────────────────────────────────
+// ── SUGGESTION CARD ──────────────────────────────────────
 function SuggestionCard({ s, i }) {
   const map = {
     critical: { bg:"#fdf0eb", border:C.clay,  icon:"🔴", color:C.clay  },
@@ -130,24 +119,313 @@ function SuggestionCard({ s, i }) {
   }
   const c = map[s.type] || map.info
   return (
-    <div className="row-hover card-enter" style={{
-      background:c.bg, borderLeft:`4px solid ${c.border}`,
-      borderRadius:10, padding:"11px 15px", marginBottom:9,
-      display:"flex", gap:10, alignItems:"flex-start",
-      animationDelay:`${i * 0.08}s`
-    }}>
+    <div className="row-hover card-enter" style={{ background:c.bg, borderLeft:`4px solid ${c.border}`, borderRadius:10, padding:"11px 15px", marginBottom:9, display:"flex", gap:10, alignItems:"flex-start", animationDelay:`${i * 0.08}s` }}>
       <span style={{ fontSize:15 }}>{c.icon}</span>
       <span style={{ fontSize:13, color:C.bark, lineHeight:1.65, fontWeight:600 }}>{s.msg}</span>
     </div>
   )
 }
 
+// ── EMAIL ALERT SECTION ──────────────────────────────────
+function EmailAlertSection({ houseId, userData }) {
+  const [email,      setEmail]      = useState(userData?.email || "")
+  const [saving,     setSaving]     = useState(false)
+  const [sending,    setSending]    = useState(false)
+  const [status,     setStatus]     = useState(null)  // { type: "success"|"error", msg: string }
+
+  const flash = (type, msg) => {
+    setStatus({ type, msg })
+    setTimeout(() => setStatus(null), 4500)
+  }
+
+  const handleSaveEmail = async () => {
+    if (!email || !email.includes('@')) { flash("error", "Please enter a valid email address."); return }
+    setSaving(true)
+    try {
+      await authAxios().post(`${API}/api/update-email`, { email })
+      flash("success", `✅ Email saved: ${email}`)
+    } catch (e) {
+      flash("error", e.response?.data?.error || "Failed to save email.")
+    }
+    setSaving(false)
+  }
+
+  const handleSendAlert = async (type) => {
+    if (!userData?.email && !email) { flash("error", "Please save your email address first."); return }
+    setSending(type)
+    try {
+      const res = await authAxios().post(`${API}/api/send-alert`, { type })
+      flash("success", `📧 ${res.data.message}`)
+    } catch (e) {
+      flash("error", e.response?.data?.error || "Failed to send email.")
+    }
+    setSending(null)
+  }
+
+  const isCritical = userData?.green_score < 40
+
+  return (
+    <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}`, marginTop:20 }}>
+      <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:18 }}>
+        📧 Email Alerts
+      </h3>
+      <p style={{ color:C.leaf, fontSize:13, marginBottom:18, fontWeight:600 }}>
+        Receive your GreenScore report and critical waste alerts directly in your inbox.
+      </p>
+
+      {/* Email input row */}
+      <div style={{ display:"flex", gap:10, marginBottom:14, alignItems:"stretch" }}>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          onKeyDown={e => e.key === "Enter" && handleSaveEmail()}
+          style={{
+            flex:1, padding:"11px 14px", borderRadius:10,
+            border:`1.5px solid ${C.sand}`, background:C.cream,
+            color:C.bark, fontSize:14, fontFamily:"'Nunito',sans-serif",
+            fontWeight:600, outline:"none"
+          }}
+        />
+        <button
+          onClick={handleSaveEmail}
+          disabled={saving}
+          className="email-btn"
+          style={{
+            padding:"11px 20px", borderRadius:10,
+            background: saving ? C.sand : C.moss,
+            color:"white", border:"none",
+            cursor: saving ? "not-allowed" : "pointer",
+            fontWeight:800, fontSize:13,
+            fontFamily:"'Nunito',sans-serif",
+            transition:"background 0.2s"
+          }}
+        >{saving ? "Saving…" : "💾 Save Email"}</button>
+      </div>
+
+      {/* Alert buttons */}
+      <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
+        <button
+          onClick={() => handleSendAlert("report")}
+          disabled={!!sending}
+          className="email-btn"
+          style={{
+            flex:1, minWidth:160, padding:"11px 16px", borderRadius:10,
+            background: sending === "report" ? C.sand : `linear-gradient(135deg,${C.river},#3a6a7a)`,
+            color: sending === "report" ? C.bark : "white",
+            border:"none", cursor: sending ? "not-allowed" : "pointer",
+            fontWeight:800, fontSize:13, fontFamily:"'Nunito',sans-serif",
+            boxShadow: sending === "report" ? "none" : `0 4px 14px ${C.river}44`,
+            transition:"all 0.2s"
+          }}
+        >{sending === "report" ? "Sending…" : "📊 Send Sustainability Report"}</button>
+
+        <button
+          onClick={() => handleSendAlert("critical")}
+          disabled={!!sending}
+          className="email-btn"
+          style={{
+            flex:1, minWidth:160, padding:"11px 16px", borderRadius:10,
+            background: sending === "critical" ? C.sand : isCritical
+              ? `linear-gradient(135deg,${C.clay},#9a4e2a)`
+              : C.cream,
+            color: sending === "critical" ? C.bark : isCritical ? "white" : C.clay,
+            border: isCritical ? "none" : `1.5px solid ${C.clay}44`,
+            cursor: sending ? "not-allowed" : "pointer",
+            fontWeight:800, fontSize:13, fontFamily:"'Nunito',sans-serif",
+            boxShadow: (sending !== "critical" && isCritical) ? `0 4px 14px ${C.clay}44` : "none",
+            transition:"all 0.2s"
+          }}
+        >{sending === "critical" ? "Sending…" : "🔴 Send Critical Alert"}</button>
+      </div>
+
+      {/* Status feedback */}
+      {status && (
+        <div style={{
+          marginTop:12, padding:"10px 14px", borderRadius:10,
+          background: status.type === "success" ? "#eaf2e0" : "#fdf0eb",
+          border:`1px solid ${status.type === "success" ? C.fern : C.clay}`,
+          color: status.type === "success" ? C.moss : C.clay,
+          fontSize:13, fontWeight:700
+        }}>{status.msg}</div>
+      )}
+
+      {/* Info note */}
+      <div style={{ marginTop:14, padding:"10px 14px", background:C.cream, borderRadius:8, fontSize:12, color:C.leaf, fontWeight:600, border:`1px solid ${C.sand}` }}>
+        🔒 Emails are generated from your GreenScore data. No raw consumption data is included — privacy preserved.
+      </div>
+    </div>
+  )
+}
+
+// ── GREENBOT CHATBOT ─────────────────────────────────────
+function GreenBot({ userData }) {
+  const [open,     setOpen]     = useState(false)
+  const [messages, setMessages] = useState([
+    { role:"bot", text:`Hi! I'm GreenBot 🌱 — your sustainability assistant for GreenFed.\n\nAsk me anything about your energy usage, water consumption, or how to improve your GreenScore!` }
+  ])
+  const [input,    setInput]    = useState("")
+  const [loading,  setLoading]  = useState(false)
+  const messagesEndRef = useRef(null)
+
+  useEffect(() => {
+    if (open) messagesEndRef.current?.scrollIntoView({ behavior:"smooth" })
+  }, [messages, open, loading])
+
+  const sendMessage = async () => {
+    const text = input.trim()
+    if (!text || loading) return
+
+    const newMessages = [...messages, { role:"user", text }]
+    setMessages(newMessages)
+    setInput("")
+    setLoading(true)
+
+    // Build history for API (exclude the initial bot greeting from history)
+    const history = newMessages.slice(1).map(m => ({ role: m.role === "user" ? "user" : "bot", text: m.text }))
+
+    try {
+      const res = await authAxios().post(`${API}/api/chat`, { message: text, history })
+      setMessages(prev => [...prev, { role:"bot", text: res.data.reply }])
+    } catch (e) {
+      const errMsg = e.response?.data?.error || "I'm having trouble connecting right now. Please try again."
+      setMessages(prev => [...prev, { role:"bot", text:`⚠️ ${errMsg}` }])
+    }
+    setLoading(false)
+  }
+
+  const QUICK = [
+    "How can I improve my GreenScore?",
+    "What uses the most electricity?",
+    "How does Federated Learning protect my privacy?",
+    "Tips to reduce water waste?",
+  ]
+
+  return (
+    <div style={{ position:"fixed", bottom:28, right:28, zIndex:1000, fontFamily:"'Nunito',sans-serif" }}>
+
+      {/* Chat Panel */}
+      {open && (
+        <div className="bot-panel" style={{
+          position:"absolute", bottom:72, right:0,
+          width:370, background:C.card,
+          borderRadius:20, overflow:"hidden",
+          boxShadow:"0 16px 56px rgba(61,43,31,0.22), 0 2px 8px rgba(0,0,0,0.1)",
+          border:`1px solid ${C.border}`,
+          display:"flex", flexDirection:"column",
+          maxHeight:560
+        }}>
+
+          {/* Header */}
+          <div style={{ background:`linear-gradient(135deg,${C.moss},${C.leaf})`, padding:"14px 18px", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+              <div style={{ width:36, height:36, background:"rgba(255,255,255,0.2)", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>🌱</div>
+              <div>
+                <div style={{ color:"white", fontWeight:800, fontSize:15 }}>GreenBot</div>
+                <div style={{ color:"#c5d9a0", fontSize:11, fontWeight:600 }}>AI Sustainability Assistant</div>
+              </div>
+            </div>
+            <button onClick={() => setOpen(false)} style={{ background:"rgba(255,255,255,0.18)", border:"none", borderRadius:8, color:"white", cursor:"pointer", padding:"5px 10px", fontWeight:800, fontSize:13 }}>✕</button>
+          </div>
+
+          {/* Messages */}
+          <div style={{ flex:1, overflowY:"auto", padding:"14px 14px 6px", display:"flex", flexDirection:"column", gap:10 }}>
+            {messages.map((m, i) => (
+              <div key={i} className="bot-msg" style={{ display:"flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
+                {m.role === "bot" && (
+                  <div style={{ width:26, height:26, background:C.moss, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, flexShrink:0, marginRight:8, marginTop:2 }}>🌱</div>
+                )}
+                <div style={{
+                  maxWidth:"80%", padding:"10px 13px", borderRadius: m.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+                  background: m.role === "user"
+                    ? `linear-gradient(135deg,${C.moss},${C.leaf})`
+                    : C.cream,
+                  color: m.role === "user" ? "white" : C.bark,
+                  fontSize:13, lineHeight:1.65, fontWeight:600,
+                  border: m.role === "bot" ? `1px solid ${C.sand}` : "none",
+                  whiteSpace:"pre-wrap"
+                }}>{m.text}</div>
+              </div>
+            ))}
+
+            {/* Typing indicator */}
+            {loading && (
+              <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                <div style={{ width:26, height:26, background:C.moss, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:12 }}>🌱</div>
+                <div style={{ background:C.cream, border:`1px solid ${C.sand}`, padding:"10px 14px", borderRadius:"16px 16px 16px 4px" }}>
+                  <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Quick suggestions (show only when few messages) */}
+          {messages.length <= 2 && !loading && (
+            <div style={{ padding:"0 12px 8px", display:"flex", flexWrap:"wrap", gap:6 }}>
+              {QUICK.map((q, i) => (
+                <button key={i} onClick={() => { setInput(q); setTimeout(() => sendMessage(), 0) }}
+                  style={{ background:C.cream, border:`1px solid ${C.sand}`, borderRadius:20, padding:"5px 12px", fontSize:11, color:C.leaf, cursor:"pointer", fontWeight:700, fontFamily:"'Nunito',sans-serif" }}>{q}</button>
+              ))}
+            </div>
+          )}
+
+          {/* Input */}
+          <div style={{ padding:"10px 12px 14px", borderTop:`1px solid ${C.border}`, display:"flex", gap:8 }}>
+            <input
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage()}
+              placeholder="Ask GreenBot anything…"
+              disabled={loading}
+              style={{
+                flex:1, padding:"10px 14px", borderRadius:10,
+                border:`1.5px solid ${C.sand}`, background:C.cream,
+                color:C.bark, fontSize:13, fontFamily:"'Nunito',sans-serif",
+                fontWeight:600, outline:"none"
+              }}
+            />
+            <button
+              onClick={sendMessage}
+              disabled={loading || !input.trim()}
+              className="bot-send"
+              style={{
+                width:40, height:40, borderRadius:10,
+                background: (loading || !input.trim()) ? C.sand : C.moss,
+                border:"none", cursor: (loading || !input.trim()) ? "not-allowed" : "pointer",
+                display:"flex", alignItems:"center", justifyContent:"center",
+                fontSize:16, transition:"background 0.2s", flexShrink:0
+              }}
+            >➤</button>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Toggle Button */}
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width:58, height:58, borderRadius:"50%",
+          background: open ? C.clay : `linear-gradient(135deg,${C.moss},${C.leaf})`,
+          border:"none", cursor:"pointer",
+          display:"flex", alignItems:"center", justifyContent:"center",
+          fontSize:26,
+          boxShadow:`0 6px 24px ${open ? C.clay : C.moss}66`,
+          transition:"all 0.3s cubic-bezier(.34,1.56,.64,1)",
+          transform: open ? "rotate(0deg) scale(1)" : "scale(1)"
+        }}
+      >{open ? "✕" : "🌱"}</button>
+    </div>
+  )
+}
+
 // ── LOGIN ───────────────────────────────────────────────
 function LoginPage({ onLogin }) {
-  const [houseId, setHouseId] = useState("")
+  const [houseId,  setHouseId]  = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [error,    setError]    = useState("")
+  const [loading,  setLoading]  = useState(false)
 
   const handleLogin = async () => {
     setLoading(true); setError("")
@@ -161,33 +439,16 @@ function LoginPage({ onLogin }) {
   }
 
   return (
-    <div style={{
-      minHeight:"100vh",
-      background:`radial-gradient(ellipse at 30% 60%, #d4e4b8 0%, #f5f0e8 50%, #e8ddc8 100%)`,
-      display:"flex", alignItems:"center", justifyContent:"center",
-      fontFamily:"'Nunito',sans-serif", position:"relative", overflow:"hidden"
-    }}>
-      {/* Decorative leaves */}
+    <div style={{ minHeight:"100vh", background:`radial-gradient(ellipse at 30% 60%, #d4e4b8 0%, #f5f0e8 50%, #e8ddc8 100%)`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Nunito',sans-serif", position:"relative", overflow:"hidden" }}>
       <div style={{ position:"absolute", fontSize:120, top:"5%", right:"8%", opacity:0.08, animation:"leafSway 4s ease-in-out infinite" }}>🌿</div>
       <div style={{ position:"absolute", fontSize:80, bottom:"10%", left:"5%", opacity:0.07, animation:"leafSway 5s ease-in-out infinite reverse" }}>🍃</div>
       <div style={{ position:"absolute", fontSize:60, top:"40%", left:"3%", opacity:0.06 }}>🌱</div>
 
-      <div className="scale-enter" style={{
-        background:"rgba(255,253,247,0.95)", backdropFilter:"blur(12px)",
-        borderRadius:24, padding:"48px 42px", width:420,
-        border:`1px solid ${C.border}`,
-        boxShadow:`0 24px 60px rgba(61,43,31,0.15), 0 0 0 1px rgba(107,124,62,0.1)`
-      }}>
+      <div className="scale-enter" style={{ background:"rgba(255,253,247,0.95)", backdropFilter:"blur(12px)", borderRadius:24, padding:"48px 42px", width:420, border:`1px solid ${C.border}`, boxShadow:`0 24px 60px rgba(61,43,31,0.15), 0 0 0 1px rgba(107,124,62,0.1)` }}>
         <div style={{ textAlign:"center", marginBottom:36 }}>
           <div style={{ fontSize:52, marginBottom:10, animation:"leafSway 3s ease-in-out infinite" }}>🌱</div>
-          <h1 style={{
-            fontFamily:"'Playfair Display',serif",
-            fontSize:38, fontWeight:900, color:C.bark,
-            letterSpacing:"-1px", marginBottom:8
-          }}>GreenFed</h1>
-          <p style={{ color:C.leaf, fontSize:14, fontWeight:600 }}>
-            Privacy-Preserving Sustainability AI
-          </p>
+          <h1 style={{ fontFamily:"'Playfair Display',serif", fontSize:38, fontWeight:900, color:C.bark, letterSpacing:"-1px", marginBottom:8 }}>GreenFed</h1>
+          <p style={{ color:C.leaf, fontSize:14, fontWeight:600 }}>Privacy-Preserving Sustainability AI</p>
         </div>
 
         {[
@@ -198,13 +459,7 @@ function LoginPage({ onLogin }) {
             <label style={{ fontSize:11, fontWeight:800, color:C.leaf, letterSpacing:"1.5px", textTransform:"uppercase" }}>{f.label}</label>
             <input value={f.val} onChange={f.set} type={f.type} placeholder={f.ph}
               onKeyDown={i===1 ? e=>e.key==="Enter"&&handleLogin() : undefined}
-              style={{
-                width:"100%", padding:"13px 16px", marginTop:7,
-                borderRadius:12, border:`1.5px solid ${C.sand}`,
-                background:C.cream, color:C.bark,
-                fontSize:15, fontFamily:"'Nunito',sans-serif",
-                outline:"none", boxSizing:"border-box", fontWeight:600
-              }}
+              style={{ width:"100%", padding:"13px 16px", marginTop:7, borderRadius:12, border:`1.5px solid ${C.sand}`, background:C.cream, color:C.bark, fontSize:15, fontFamily:"'Nunito',sans-serif", outline:"none", boxSizing:"border-box", fontWeight:600 }}
             />
           </div>
         ))}
@@ -213,16 +468,7 @@ function LoginPage({ onLogin }) {
           <div style={{ background:"#fdf0eb", border:`1px solid ${C.clay}`, color:C.clay, padding:"10px 14px", borderRadius:10, marginBottom:16, fontSize:13, textAlign:"center", fontWeight:700 }}>{error}</div>
         )}
 
-        <button onClick={handleLogin} disabled={loading} style={{
-          width:"100%", padding:"15px", borderRadius:12,
-          background: loading ? C.sand : `linear-gradient(135deg, ${C.moss}, ${C.leaf})`,
-          color: loading ? C.bark : "white",
-          border:"none", fontSize:16, fontWeight:800,
-          cursor: loading ? "not-allowed" : "pointer",
-          fontFamily:"'Nunito',sans-serif",
-          boxShadow: loading ? "none" : `0 6px 20px ${C.moss}55`,
-          letterSpacing:"0.5px"
-        }}>{loading ? "Entering..." : "Enter the Garden →"}</button>
+        <button onClick={handleLogin} disabled={loading} style={{ width:"100%", padding:"15px", borderRadius:12, background: loading ? C.sand : `linear-gradient(135deg, ${C.moss}, ${C.leaf})`, color: loading ? C.bark : "white", border:"none", fontSize:16, fontWeight:800, cursor: loading ? "not-allowed" : "pointer", fontFamily:"'Nunito',sans-serif", boxShadow: loading ? "none" : `0 6px 20px ${C.moss}55`, letterSpacing:"0.5px" }}>{loading ? "Entering..." : "Enter the Garden →"}</button>
 
         <p style={{ textAlign:"center", color:C.leaf, fontSize:12, marginTop:20, lineHeight:1.9, fontWeight:600 }}>
           Password = house id lowercase + 123<br/>
@@ -261,15 +507,7 @@ function PrivacyTab() {
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-around", flexWrap:"wrap", gap:14 }}>
           {["🏠 Your\nData","🧠 Local\nLSTM","📤 Weights\nOnly","⚙️ FedAvg","📥 Global\nModel"].map((label,i)=>(
             <div key={i} style={{ display:"flex", alignItems:"center", gap:10 }}>
-              <div style={{
-                background: step>=i ? steps[Math.min(i,4)].color : C.cream,
-                color: step>=i ? "white" : C.bark,
-                borderRadius:12, padding:"14px 18px", textAlign:"center",
-                fontSize:12, fontWeight:800, minWidth:80,
-                transition:"all 0.5s", whiteSpace:"pre-line", lineHeight:1.5,
-                boxShadow: step>=i ? `0 4px 16px ${steps[Math.min(i,4)].color}44` : "none",
-                border:`2px solid ${step>=i ? steps[Math.min(i,4)].color : C.sand}`
-              }}>{label}</div>
+              <div style={{ background: step>=i ? steps[Math.min(i,4)].color : C.cream, color: step>=i ? "white" : C.bark, borderRadius:12, padding:"14px 18px", textAlign:"center", fontSize:12, fontWeight:800, minWidth:80, transition:"all 0.5s", whiteSpace:"pre-line", lineHeight:1.5, boxShadow: step>=i ? `0 4px 16px ${steps[Math.min(i,4)].color}44` : "none", border:`2px solid ${step>=i ? steps[Math.min(i,4)].color : C.sand}` }}>{label}</div>
               {i<4 && <span style={{ color:step>i?C.moss:C.sand, fontSize:18, transition:"color 0.5s", fontWeight:900 }}>→</span>}
             </div>
           ))}
@@ -282,22 +520,11 @@ function PrivacyTab() {
       <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:28, border:`1px solid ${C.border}`, marginBottom:20 }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
           <h3 style={{ color:C.bark, fontFamily:"'Playfair Display',serif", fontSize:18 }}>Step-by-Step Walkthrough</h3>
-          <button onClick={()=>{setStep(0);setRunning(true)}} style={{
-            padding:"9px 22px", borderRadius:10,
-            background:`linear-gradient(135deg,${C.moss},${C.leaf})`,
-            color:"white", border:"none", cursor:"pointer",
-            fontWeight:800, fontSize:13, fontFamily:"'Nunito',sans-serif",
-            boxShadow:`0 4px 12px ${C.moss}44`
-          }}>{running?"Growing...":"▶ Start Animation"}</button>
+          <button onClick={()=>{setStep(0);setRunning(true)}} style={{ padding:"9px 22px", borderRadius:10, background:`linear-gradient(135deg,${C.moss},${C.leaf})`, color:"white", border:"none", cursor:"pointer", fontWeight:800, fontSize:13, fontFamily:"'Nunito',sans-serif", boxShadow:`0 4px 12px ${C.moss}44` }}>{running?"Growing...":"▶ Start Animation"}</button>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14 }}>
           {steps.map((s,i)=>(
-            <div key={i} style={{
-              padding:18, borderRadius:12,
-              background: step===i ? s.color : step>i ? "#eaf2e0" : C.cream,
-              border:`1.5px solid ${step===i ? s.color : step>i ? C.moss : C.sand}`,
-              transition:"all 0.5s"
-            }}>
+            <div key={i} style={{ padding:18, borderRadius:12, background: step===i ? s.color : step>i ? "#eaf2e0" : C.cream, border:`1.5px solid ${step===i ? s.color : step>i ? C.moss : C.sand}`, transition:"all 0.5s" }}>
               <div style={{ fontSize:24, marginBottom:8 }}>{s.icon}</div>
               <div style={{ fontWeight:800, fontSize:13, color:step===i?"white":step>i?C.moss:C.bark, marginBottom:5 }}>{s.title}</div>
               <div style={{ fontSize:11, lineHeight:1.6, color:step===i?"rgba(255,255,255,0.9)":C.leaf }}>{s.desc}</div>
@@ -347,24 +574,16 @@ function CarbonTab({ houseId, data, devices }) {
   return (
     <div>
       <h2 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, fontSize:26, marginBottom:6 }}>🌍 Carbon Footprint</h2>
-      <p style={{ color:C.leaf, marginBottom:24, fontWeight:600, fontSize:14 }}>
-        Your electricity waste converted to real CO₂ — India grid factor: 0.82 kg/kWh
-      </p>
+      <p style={{ color:C.leaf, marginBottom:24, fontWeight:600, fontSize:14 }}>Your electricity waste converted to real CO₂ — India grid factor: 0.82 kg/kWh</p>
 
-      {/* Main stats */}
       <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14, marginBottom:20 }}>
         {[
-          { label:"Daily CO₂",          value:`${co2Day} kg`,   color:C.sun,  icon:"📅" },
-          { label:"Monthly CO₂",        value:`${co2Month} kg`, color:C.clay, icon:"📆" },
-          { label:"Yearly CO₂",         value:`${co2Year} kg`,  color:C.clay, icon:"📊" },
-          { label:"Trees to Offset",    value:trees,             color:C.moss, icon:"🌳" },
+          { label:"Daily CO₂",       value:`${co2Day} kg`,   color:C.sun,  icon:"📅" },
+          { label:"Monthly CO₂",     value:`${co2Month} kg`, color:C.clay, icon:"📆" },
+          { label:"Yearly CO₂",      value:`${co2Year} kg`,  color:C.clay, icon:"📊" },
+          { label:"Trees to Offset", value:trees,             color:C.moss, icon:"🌳" },
         ].map((c,i)=>(
-          <div key={i} className="card-enter" style={{
-            background:C.card, borderRadius:14, padding:20, textAlign:"center",
-            border:`1px solid ${C.border}`,
-            borderTop:`4px solid ${c.color}`,
-            animationDelay:`${i*0.1}s`
-          }}>
+          <div key={i} className="card-enter" style={{ background:C.card, borderRadius:14, padding:20, textAlign:"center", border:`1px solid ${C.border}`, borderTop:`4px solid ${c.color}`, animationDelay:`${i*0.1}s` }}>
             <div style={{ fontSize:26, marginBottom:8 }}>{c.icon}</div>
             <div style={{ fontSize:22, fontWeight:900, color:c.color, fontFamily:"'Playfair Display',serif" }}>{c.value}</div>
             <div style={{ fontSize:12, color:C.leaf, marginTop:4, fontWeight:700 }}>{c.label}</div>
@@ -372,7 +591,6 @@ function CarbonTab({ houseId, data, devices }) {
         ))}
       </div>
 
-      {/* Breakdown + savings */}
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:18, marginBottom:20 }}>
         <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
           <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:18, fontSize:17 }}>⚡ Daily Electricity Breakdown</h3>
@@ -392,7 +610,6 @@ function CarbonTab({ houseId, data, devices }) {
             </div>
           ))}
         </div>
-
         <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
           <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:18, fontSize:17 }}>🌱 Potential Annual Savings</h3>
           <div style={{ textAlign:"center", padding:"16px 0" }}>
@@ -406,27 +623,19 @@ function CarbonTab({ houseId, data, devices }) {
         </div>
       </div>
 
-      {/* Tree visualizer */}
       <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}`, marginBottom:20 }}>
         <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:8, fontSize:17 }}>🌳 Trees Needed to Offset Your Yearly CO₂</h3>
-        <p style={{ color:C.leaf, fontSize:13, marginBottom:16, fontWeight:600 }}>
-          You emit <b style={{ color:C.clay }}>{co2Year} kg</b> CO₂/year from wasted electricity. Each tree absorbs ~21 kg/year.
-        </p>
+        <p style={{ color:C.leaf, fontSize:13, marginBottom:16, fontWeight:600 }}>You emit <b style={{ color:C.clay }}>{co2Year} kg</b> CO₂/year from wasted electricity. Each tree absorbs ~21 kg/year.</p>
         <div style={{ fontSize:28, lineHeight:2, letterSpacing:4 }}>
           {"🌳".repeat(Math.min(trees, 20))}
           {trees > 20 && <span style={{ fontSize:14, color:C.leaf, marginLeft:8, fontWeight:700 }}>+{trees-20} more</span>}
         </div>
-        <p style={{ marginTop:10, fontSize:13, color:C.leaf, fontWeight:700 }}>
-          You need <b style={{ color:C.clay }}>{trees} trees</b> to fully offset your yearly electricity waste
-        </p>
+        <p style={{ marginTop:10, fontSize:13, color:C.leaf, fontWeight:700 }}>You need <b style={{ color:C.clay }}>{trees} trees</b> to fully offset your yearly electricity waste</p>
       </div>
 
-      {/* Monthly chart */}
       <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
         <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:17 }}>📊 Monthly CO₂ Projection</h3>
-        <p style={{ color:C.leaf, fontSize:12, marginBottom:20, fontWeight:600 }}>
-          🟢 low season · 🟡 normal · 🔴 high season (summer peak)
-        </p>
+        <p style={{ color:C.leaf, fontSize:12, marginBottom:20, fontWeight:600 }}>🟢 low season · 🟡 normal · 🔴 high season (summer peak)</p>
         <div style={{ display:"flex", alignItems:"flex-end", gap:6, height:150 }}>
           {monthlyData.map(({m,v},i)=>{
             const h   = Math.round((v/maxMonthly)*130)
@@ -452,18 +661,14 @@ function PredictTab({ userData }) {
     if (!userData) return
     const base  = userData.green_score
     const trend = userData.elec_waste > 50 ? -0.3 : base < 50 ? 0.5 : 0.2
-    setPreds(Array.from({length:30},(_,i)=>({
-      day: i+1,
-      score: Math.max(10,Math.min(95,Math.round(base+trend*i+(Math.random()-0.5)*5)))
-    })))
+    setPreds(Array.from({length:30},(_,i)=>({ day:i+1, score:Math.max(10,Math.min(95,Math.round(base+trend*i+(Math.random()-0.5)*5))) })))
   },[userData])
 
   if (!preds) return null
-  const max    = Math.max(...preds.map(p=>p.score))
-  const min    = Math.min(...preds.map(p=>p.score))
-  const final  = preds[29].score
+  const max   = Math.max(...preds.map(p=>p.score))
+  const min   = Math.min(...preds.map(p=>p.score))
+  const final = preds[29].score
   const rising = final > userData.green_score
-
   const getBarCol = s => s>=75?C.moss:s>=55?C.leaf:s>=35?C.sun:C.clay
 
   return (
@@ -486,20 +691,11 @@ function PredictTab({ userData }) {
       </div>
 
       <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}`, marginBottom:20 }}>
-        <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:17 }}>
-          {rising ? "📈 Score is growing" : "📉 Score is declining"}
-        </h3>
-        <p style={{ color:C.leaf, fontSize:12, marginBottom:18, fontWeight:600 }}>
-          🟢 thriving · 🟡 growing · 🟠 budding · 🔴 wilting
-        </p>
+        <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:17 }}>{rising ? "📈 Score is growing" : "📉 Score is declining"}</h3>
+        <p style={{ color:C.leaf, fontSize:12, marginBottom:18, fontWeight:600 }}>🟢 thriving · 🟡 growing · 🟠 budding · 🔴 wilting</p>
         <div style={{ display:"flex", alignItems:"flex-end", gap:2, height:180 }}>
           {preds.map((p,i)=>(
-            <div key={i} title={`Day ${p.day}: ${p.score}`} style={{
-              flex:1, height:`${(p.score/100)*165}px`,
-              background:getBarCol(p.score),
-              borderRadius:"3px 3px 0 0", opacity:0.85,
-              transition:"height 0.5s ease"
-            }} />
+            <div key={i} title={`Day ${p.day}: ${p.score}`} style={{ flex:1, height:`${(p.score/100)*165}px`, background:getBarCol(p.score), borderRadius:"3px 3px 0 0", opacity:0.85, transition:"height 0.5s ease" }} />
           ))}
         </div>
         <div style={{ display:"flex", justifyContent:"space-between", marginTop:8 }}>
@@ -600,273 +796,103 @@ function ReportTab({ userData }) {
             <div key={i} style={{ padding:"10px 14px", background:"#eaf2e0", borderRadius:8, fontSize:12, color:C.moss, fontWeight:700, border:`1px solid ${C.fern}` }}>{item}</div>
           ))}
         </div>
-        <button onClick={generate} disabled={gen} style={{
-          width:"100%", padding:16, borderRadius:12,
-          background: gen ? C.sand : `linear-gradient(135deg,${C.moss},${C.leaf})`,
-          color: gen ? C.bark : "white",
-          border:"none", fontSize:15, fontWeight:800,
-          cursor: gen ? "not-allowed" : "pointer",
-          fontFamily:"'Nunito',sans-serif",
-          boxShadow: gen ? "none" : `0 6px 20px ${C.moss}44`
-        }}>{gen ? "Preparing..." : "📥 Download Nature Report"}</button>
+        <button onClick={generate} disabled={gen} style={{ width:"100%", padding:16, borderRadius:12, background: gen ? C.sand : `linear-gradient(135deg,${C.moss},${C.leaf})`, color: gen ? C.bark : "white", border:"none", fontSize:15, fontWeight:800, cursor: gen ? "not-allowed" : "pointer", fontFamily:"'Nunito',sans-serif", boxShadow: gen ? "none" : `0 6px 20px ${C.moss}44` }}>{gen ? "Preparing..." : "📥 Download Nature Report"}</button>
       </div>
     </div>
   )
 }
+
+// ── SIMULATOR TAB ────────────────────────────────────────
 function SimulatorTab({ userData }) {
-  const [acReduction,      setAcReduction]      = useState(0)
-  const [ledSwitch,        setLedSwitch]        = useState(false)
-  const [applianceShift,   setApplianceShift]   = useState(false)
-  const [waterLeakFix,     setWaterLeakFix]     = useState(false)
-  const [showerhead,       setShowerhead]       = useState(false)
-  const [fridgeMaintain,   setFridgeMaintain]   = useState(false)
+  const [acReduction,    setAcReduction]    = useState(0)
+  const [ledSwitch,      setLedSwitch]      = useState(false)
+  const [applianceShift, setApplianceShift] = useState(false)
+  const [waterLeakFix,   setWaterLeakFix]   = useState(false)
+  const [showerhead,     setShowerhead]     = useState(false)
+  const [fridgeMaintain, setFridgeMaintain] = useState(false)
 
-  const base = userData.green_score
+  const base         = userData.green_score
+  const acImpact     = Math.round(acReduction * 0.8)
+  const ledImpact    = ledSwitch      ? 3 : 0
+  const applImpact   = applianceShift ? 3 : 0
+  const waterImpact  = waterLeakFix   ? 5 : 0
+  const showerImpact = showerhead     ? 4 : 0
+  const fridgeImpact = fridgeMaintain ? 2 : 0
+  const totalImpact  = acImpact + ledImpact + applImpact + waterImpact + showerImpact + fridgeImpact
+  const newScore     = Math.min(95, base + totalImpact)
+  const { color:newColor, label:newLabel } = getScore(newScore)
+  const { color:oldColor } = getScore(base)
 
-  // Calculate impact of each action
-  const acImpact        = Math.round(acReduction * 0.8)
-  const ledImpact       = ledSwitch      ? 3  : 0
-  const applianceImpact = applianceShift ? 3  : 0
-  const waterImpact     = waterLeakFix   ? 5  : 0
-  const showerImpact    = showerhead     ? 4  : 0
-  const fridgeImpact    = fridgeMaintain ? 2  : 0
-
-  const totalImpact   = acImpact + ledImpact + applianceImpact + waterImpact + showerImpact + fridgeImpact
-  const newScore      = Math.min(95, base + totalImpact)
-  const { color: newColor, label: newLabel } = getScore(newScore)
-  const { color: oldColor } = getScore(base)
+  const Toggle = ({ val, set }) => (
+    <div onClick={() => set(!val)} style={{ width:48, height:26, borderRadius:13, background: val ? C.moss : C.sand, cursor:"pointer", position:"relative", transition:"background 0.3s" }}>
+      <div style={{ width:22, height:22, borderRadius:"50%", background:"white", position:"absolute", top:2, left: val ? 24 : 2, transition:"left 0.3s", boxShadow:"0 2px 4px rgba(0,0,0,0.2)" }} />
+    </div>
+  )
 
   const actions = [
-    {
-      label   : "⚡ Reduce AC usage",
-      sub     : `${acReduction} hrs/day reduction`,
-      impact  : acImpact,
-      control : (
-        <div>
-          <input type="range" min={0} max={6} value={acReduction}
-            onChange={e => setAcReduction(Number(e.target.value))}
-            style={{ width:"100%", accentColor: C.moss, cursor:"pointer" }}
-          />
-          <div style={{ display:"flex", justifyContent:"space-between", fontSize:11, color:C.leaf, fontWeight:700 }}>
-            <span>0 hrs</span><span>3 hrs</span><span>6 hrs</span>
-          </div>
-        </div>
-      )
-    },
-    {
-      label   : "💡 Switch to LED bulbs",
-      sub     : "All lights replaced",
-      impact  : ledImpact,
-      control : (
-        <div onClick={() => setLedSwitch(!ledSwitch)} style={{
-          width:48, height:26, borderRadius:13,
-          background: ledSwitch ? C.moss : C.sand,
-          cursor:"pointer", position:"relative", transition:"background 0.3s"
-        }}>
-          <div style={{
-            width:22, height:22, borderRadius:"50%", background:"white",
-            position:"absolute", top:2,
-            left: ledSwitch ? 24 : 2,
-            transition:"left 0.3s",
-            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
-          }} />
-        </div>
-      )
-    },
-    {
-      label   : "🕐 Off-peak appliances",
-      sub     : "Run after 10PM",
-      impact  : applianceImpact,
-      control : (
-        <div onClick={() => setApplianceShift(!applianceShift)} style={{
-          width:48, height:26, borderRadius:13,
-          background: applianceShift ? C.moss : C.sand,
-          cursor:"pointer", position:"relative", transition:"background 0.3s"
-        }}>
-          <div style={{
-            width:22, height:22, borderRadius:"50%", background:"white",
-            position:"absolute", top:2,
-            left: applianceShift ? 24 : 2,
-            transition:"left 0.3s",
-            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
-          }} />
-        </div>
-      )
-    },
-    {
-      label   : "💧 Fix water leaks",
-      sub     : "All leaks repaired",
-      impact  : waterImpact,
-      control : (
-        <div onClick={() => setWaterLeakFix(!waterLeakFix)} style={{
-          width:48, height:26, borderRadius:13,
-          background: waterLeakFix ? C.moss : C.sand,
-          cursor:"pointer", position:"relative", transition:"background 0.3s"
-        }}>
-          <div style={{
-            width:22, height:22, borderRadius:"50%", background:"white",
-            position:"absolute", top:2,
-            left: waterLeakFix ? 24 : 2,
-            transition:"left 0.3s",
-            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
-          }} />
-        </div>
-      )
-    },
-    {
-      label   : "🚿 Low-flow showerheads",
-      sub     : "Installed throughout",
-      impact  : showerImpact,
-      control : (
-        <div onClick={() => setShowerhead(!showerhead)} style={{
-          width:48, height:26, borderRadius:13,
-          background: showerhead ? C.moss : C.sand,
-          cursor:"pointer", position:"relative", transition:"background 0.3s"
-        }}>
-          <div style={{
-            width:22, height:22, borderRadius:"50%", background:"white",
-            position:"absolute", top:2,
-            left: showerhead ? 24 : 2,
-            transition:"left 0.3s",
-            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
-          }} />
-        </div>
-      )
-    },
-    {
-      label   : "❄️ Fridge maintenance",
-      sub     : "Clean coils + check seal",
-      impact  : fridgeImpact,
-      control : (
-        <div onClick={() => setFridgeMaintain(!fridgeMaintain)} style={{
-          width:48, height:26, borderRadius:13,
-          background: fridgeMaintain ? C.moss : C.sand,
-          cursor:"pointer", position:"relative", transition:"background 0.3s"
-        }}>
-          <div style={{
-            width:22, height:22, borderRadius:"50%", background:"white",
-            position:"absolute", top:2,
-            left: fridgeMaintain ? 24 : 2,
-            transition:"left 0.3s",
-            boxShadow:"0 2px 4px rgba(0,0,0,0.2)"
-          }} />
-        </div>
-      )
-    },
+    { label:"⚡ Reduce AC usage", sub:`${acReduction} hrs/day reduction`, impact:acImpact,
+      control:<div><input type="range" min={0} max={6} value={acReduction} onChange={e=>setAcReduction(Number(e.target.value))} style={{ width:"100%", accentColor:C.moss, cursor:"pointer" }} /><div style={{ display:"flex", justifyContent:"space-between", fontSize:11, color:C.leaf, fontWeight:700 }}><span>0 hrs</span><span>3 hrs</span><span>6 hrs</span></div></div> },
+    { label:"💡 Switch to LED bulbs",     sub:"All lights replaced",       impact:ledImpact,    control:<Toggle val={ledSwitch}      set={setLedSwitch} /> },
+    { label:"🕐 Off-peak appliances",     sub:"Run after 10PM",             impact:applImpact,   control:<Toggle val={applianceShift} set={setApplianceShift} /> },
+    { label:"💧 Fix water leaks",         sub:"All leaks repaired",         impact:waterImpact,  control:<Toggle val={waterLeakFix}   set={setWaterLeakFix} /> },
+    { label:"🚿 Low-flow showerheads",    sub:"Installed throughout",       impact:showerImpact, control:<Toggle val={showerhead}     set={setShowerhead} /> },
+    { label:"❄️ Fridge maintenance",     sub:"Clean coils + check seal",   impact:fridgeImpact, control:<Toggle val={fridgeMaintain} set={setFridgeMaintain} /> },
   ]
 
   return (
     <div>
       <h2 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, fontSize:26, marginBottom:6 }}>🎛️ What-If Simulator</h2>
-      <p style={{ color:C.leaf, marginBottom:24, fontWeight:600, fontSize:14 }}>
-        Adjust sliders and toggles to see how actions improve your GreenScore in real time
-      </p>
+      <p style={{ color:C.leaf, marginBottom:24, fontWeight:600, fontSize:14 }}>Adjust sliders and toggles to see how actions improve your GreenScore in real time</p>
 
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20, marginBottom:20 }}>
-
-        {/* Live Score Preview */}
-        <div className="card-enter" style={{
-          background:`linear-gradient(135deg, ${getScore(newScore).bg}, ${C.card})`,
-          border:`2px solid ${newColor}44`, borderRadius:18, padding:28,
-          display:"flex", flexDirection:"column", alignItems:"center", gap:14
-        }}>
-          <span style={{ fontSize:12, fontWeight:800, color:newColor, textTransform:"uppercase", letterSpacing:"1.5px" }}>
-            Projected GreenScore
-          </span>
+        <div className="card-enter" style={{ background:`linear-gradient(135deg,${getScore(newScore).bg},${C.card})`, border:`2px solid ${newColor}44`, borderRadius:18, padding:28, display:"flex", flexDirection:"column", alignItems:"center", gap:14 }}>
+          <span style={{ fontSize:12, fontWeight:800, color:newColor, textTransform:"uppercase", letterSpacing:"1.5px" }}>Projected GreenScore</span>
           <ScoreRing score={newScore} size={160} />
-          <div style={{ padding:"6px 20px", borderRadius:20, background:newColor, color:"white", fontWeight:800, fontSize:13 }}>
-            {newLabel}
-          </div>
-
-          {/* Before vs After */}
+          <div style={{ padding:"6px 20px", borderRadius:20, background:newColor, color:"white", fontWeight:800, fontSize:13 }}>{newLabel}</div>
           <div style={{ width:"100%", background:C.cream, borderRadius:12, padding:14, border:`1px solid ${C.sand}` }}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
-              <div style={{ textAlign:"center" }}>
-                <div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>BEFORE</div>
-                <div style={{ fontSize:28, fontWeight:900, color:oldColor, fontFamily:"'Playfair Display',serif" }}>{base}</div>
-              </div>
+              <div style={{ textAlign:"center" }}><div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>BEFORE</div><div style={{ fontSize:28, fontWeight:900, color:oldColor, fontFamily:"'Playfair Display',serif" }}>{base}</div></div>
               <div style={{ fontSize:24 }}>→</div>
-              <div style={{ textAlign:"center" }}>
-                <div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>AFTER</div>
-                <div style={{ fontSize:28, fontWeight:900, color:newColor, fontFamily:"'Playfair Display',serif" }}>{newScore}</div>
-              </div>
-              <div style={{ textAlign:"center" }}>
-                <div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>GAIN</div>
-                <div style={{ fontSize:28, fontWeight:900, color:totalImpact>0?C.moss:C.sand, fontFamily:"'Playfair Display',serif" }}>
-                  +{totalImpact}
-                </div>
-              </div>
+              <div style={{ textAlign:"center" }}><div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>AFTER</div><div style={{ fontSize:28, fontWeight:900, color:newColor, fontFamily:"'Playfair Display',serif" }}>{newScore}</div></div>
+              <div style={{ textAlign:"center" }}><div style={{ fontSize:11, color:C.leaf, fontWeight:700, marginBottom:4 }}>GAIN</div><div style={{ fontSize:28, fontWeight:900, color:totalImpact>0?C.moss:C.sand, fontFamily:"'Playfair Display',serif" }}>+{totalImpact}</div></div>
             </div>
             <div style={{ background:C.sand, borderRadius:6, height:10, position:"relative" }}>
               <div style={{ width:`${base}%`, background:oldColor, height:10, borderRadius:6, position:"absolute", opacity:0.4 }} />
               <div style={{ width:`${newScore}%`, background:newColor, height:10, borderRadius:6, position:"absolute", transition:"width 0.5s ease", boxShadow:`0 0 8px ${newColor}55` }} />
             </div>
           </div>
-
           {totalImpact > 0 && (
-            <div style={{
-              width:"100%", padding:"12px 16px", background:"#eaf2e0",
-              borderRadius:10, border:`1px solid ${C.fern}`,
-              fontSize:13, color:C.moss, fontWeight:700, textAlign:"center"
-            }}>
-              🌿 {totalImpact} point improvement activated!
-              {newScore >= 70 && base < 70 && " You've crossed into Efficient! 🎉"}
+            <div style={{ width:"100%", padding:"12px 16px", background:"#eaf2e0", borderRadius:10, border:`1px solid ${C.fern}`, fontSize:13, color:C.moss, fontWeight:700, textAlign:"center" }}>
+              🌿 {totalImpact} point improvement activated!{newScore >= 70 && base < 70 && " You've crossed into Efficient! 🎉"}
             </div>
           )}
         </div>
 
-        {/* Action Controls */}
         <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
-          <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:17 }}>
-            🌿 Adjust Your Actions
-          </h3>
+          <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:17 }}>🌿 Adjust Your Actions</h3>
           {actions.map((action, i) => (
-            <div key={i} style={{
-              marginBottom:16, padding:"12px 14px", borderRadius:12,
-              background: action.impact > 0 ? "#eaf2e0" : C.cream,
-              border:`1px solid ${action.impact > 0 ? C.fern : C.sand}`,
-              transition:"all 0.3s"
-            }}>
+            <div key={i} style={{ marginBottom:16, padding:"12px 14px", borderRadius:12, background: action.impact > 0 ? "#eaf2e0" : C.cream, border:`1px solid ${action.impact > 0 ? C.fern : C.sand}`, transition:"all 0.3s" }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:8 }}>
-                <div>
-                  <div style={{ fontSize:13, color:C.bark, fontWeight:700 }}>{action.label}</div>
-                  <div style={{ fontSize:11, color:C.leaf, fontWeight:600 }}>{action.sub}</div>
-                </div>
+                <div><div style={{ fontSize:13, color:C.bark, fontWeight:700 }}>{action.label}</div><div style={{ fontSize:11, color:C.leaf, fontWeight:600 }}>{action.sub}</div></div>
                 <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-                  {action.impact > 0 && (
-                    <span style={{ background:C.moss, color:"white", padding:"2px 10px", borderRadius:20, fontSize:11, fontWeight:800 }}>
-                      +{action.impact} pts
-                    </span>
-                  )}
+                  {action.impact > 0 && <span style={{ background:C.moss, color:"white", padding:"2px 10px", borderRadius:20, fontSize:11, fontWeight:800 }}>+{action.impact} pts</span>}
                   {action.control}
                 </div>
               </div>
             </div>
           ))}
-
-          <button onClick={()=>{
-            setAcReduction(0); setLedSwitch(false); setApplianceShift(false)
-            setWaterLeakFix(false); setShowerhead(false); setFridgeMaintain(false)
-          }} style={{
-            width:"100%", padding:"10px", borderRadius:10,
-            background:C.cream, color:C.bark, border:`1px solid ${C.sand}`,
-            cursor:"pointer", fontWeight:700, fontSize:13,
-            fontFamily:"'Nunito',sans-serif", marginTop:8
-          }}>↺ Reset All</button>
+          <button onClick={()=>{setAcReduction(0);setLedSwitch(false);setApplianceShift(false);setWaterLeakFix(false);setShowerhead(false);setFridgeMaintain(false)}} style={{ width:"100%", padding:"10px", borderRadius:10, background:C.cream, color:C.bark, border:`1px solid ${C.sand}`, cursor:"pointer", fontWeight:700, fontSize:13, fontFamily:"'Nunito',sans-serif", marginTop:8 }}>↺ Reset All</button>
         </div>
       </div>
 
-      {/* CO2 Savings */}
       {totalImpact > 0 && (
         <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
-          <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:17 }}>
-            🌍 Environmental Impact of Your Changes
-          </h3>
+          <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:17 }}>🌍 Environmental Impact of Your Changes</h3>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:14 }}>
             {[
-              { label:"Score Improvement",  value:`+${totalImpact} pts`,                                     color:C.moss,  icon:"📈" },
-              { label:"Est. CO₂ Saved/yr",  value:`~${Math.round(totalImpact * 8)} kg`,                     color:C.river, icon:"🌍" },
-              { label:"Trees Equivalent",   value:`~${Math.ceil(totalImpact * 8 / 21)} trees`,              color:C.leaf,  icon:"🌳" },
+              { label:"Score Improvement",  value:`+${totalImpact} pts`,               color:C.moss,  icon:"📈" },
+              { label:"Est. CO₂ Saved/yr",  value:`~${Math.round(totalImpact*8)} kg`,  color:C.river, icon:"🌍" },
+              { label:"Trees Equivalent",   value:`~${Math.ceil(totalImpact*8/21)} trees`, color:C.leaf, icon:"🌳" },
             ].map((s,i)=>(
               <div key={i} style={{ background:C.cream, borderRadius:12, padding:18, textAlign:"center", border:`1px solid ${C.fern}` }}>
                 <div style={{ fontSize:26, marginBottom:8 }}>{s.icon}</div>
@@ -880,9 +906,10 @@ function SimulatorTab({ userData }) {
     </div>
   )
 }
+
+// ── CONVERGENCE GRAPH ────────────────────────────────────
 function ConvergenceGraph() {
   const [data, setData] = useState(null)
-
   useEffect(() => {
     authAxios().get(`${API}/api/convergence`)
       .then(res => setData(res.data))
@@ -895,45 +922,27 @@ function ConvergenceGraph() {
 
   if (!data) return null
 
-  const maxLoss  = Math.max(...data.elec_loss, ...data.water_loss)
-  const minLoss  = Math.min(...data.elec_loss, ...data.water_loss)
-  const range    = maxLoss - minLoss
-  const chartH   = 180
-  const chartW   = 600
-
-  const toY = (val) => chartH - ((val - minLoss) / range) * (chartH - 20) - 10
-
-  const elecPoints  = data.rounds.map((r, i) => {
-    const x = (i / (data.rounds.length - 1)) * chartW
-    const y = toY(data.elec_loss[i])
-    return `${x},${y}`
-  }).join(' ')
-
-  const waterPoints = data.rounds.map((r, i) => {
-    const x = (i / (data.rounds.length - 1)) * chartW
-    const y = toY(data.water_loss[i])
-    return `${x},${y}`
-  }).join(' ')
+  const maxLoss = Math.max(...data.elec_loss, ...data.water_loss)
+  const minLoss = Math.min(...data.elec_loss, ...data.water_loss)
+  const range   = maxLoss - minLoss
+  const chartH  = 180
+  const chartW  = 600
+  const toY     = val => chartH - ((val - minLoss) / range) * (chartH - 20) - 10
 
   const improvement_e = (((data.elec_loss[0] - data.elec_loss[9]) / data.elec_loss[0]) * 100).toFixed(1)
   const improvement_w = (((data.water_loss[0] - data.water_loss[9]) / data.water_loss[0]) * 100).toFixed(1)
 
   return (
     <div className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}`, marginTop:20 }}>
-      <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:17 }}>
-        📉 FL Training Convergence — Loss Across 10 Rounds
-      </h3>
-      <p style={{ color:C.leaf, fontSize:12, marginBottom:20, fontWeight:600 }}>
-        Decreasing loss proves the Federated Learning model is converging correctly
-      </p>
+      <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:6, fontSize:17 }}>📉 FL Training Convergence — Loss Across 10 Rounds</h3>
+      <p style={{ color:C.leaf, fontSize:12, marginBottom:20, fontWeight:600 }}>Decreasing loss proves the Federated Learning model is converging correctly</p>
 
-      {/* Stats */}
       <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:20 }}>
         {[
-          { label:"Elec Loss Round 1",  value:data.elec_loss[0].toFixed(5),  color:C.river },
-          { label:"Elec Loss Round 10", value:data.elec_loss[9].toFixed(5),  color:C.moss  },
-          { label:"Water Loss Round 1", value:data.water_loss[0].toFixed(5), color:C.clay  },
-          { label:"Water Loss Round 10",value:data.water_loss[9].toFixed(5), color:C.moss  },
+          { label:"Elec Loss Round 1",   value:data.elec_loss[0].toFixed(5),  color:C.river },
+          { label:"Elec Loss Round 10",  value:data.elec_loss[9].toFixed(5),  color:C.moss  },
+          { label:"Water Loss Round 1",  value:data.water_loss[0].toFixed(5), color:C.clay  },
+          { label:"Water Loss Round 10", value:data.water_loss[9].toFixed(5), color:C.moss  },
         ].map((s,i)=>(
           <div key={i} style={{ background:C.cream, borderRadius:10, padding:12, textAlign:"center", border:`1px solid ${C.sand}` }}>
             <div style={{ fontSize:16, fontWeight:900, color:s.color, fontFamily:"'Playfair Display',serif" }}>{s.value}</div>
@@ -942,59 +951,22 @@ function ConvergenceGraph() {
         ))}
       </div>
 
-      {/* SVG Chart */}
       <div style={{ overflowX:"auto" }}>
-        <svg width={chartW + 60} height={chartH + 40} style={{ display:"block", margin:"0 auto" }}>
-          {/* Grid lines */}
-          {[0,1,2,3,4].map(i => (
-            <line key={i}
-              x1={30} y1={10 + (i * (chartH-20)/4)}
-              x2={chartW + 30} y2={10 + (i * (chartH-20)/4)}
-              stroke={C.sand} strokeWidth={1} strokeDasharray="4,4"
-            />
+        <svg width={chartW+60} height={chartH+40} style={{ display:"block", margin:"0 auto" }}>
+          {[0,1,2,3,4].map(i=>(
+            <line key={i} x1={30} y1={10+(i*(chartH-20)/4)} x2={chartW+30} y2={10+(i*(chartH-20)/4)} stroke={C.sand} strokeWidth={1} strokeDasharray="4,4" />
           ))}
-
-          {/* Round labels */}
-          {data.rounds.map((r, i) => (
-            <text key={i}
-              x={30 + (i / (data.rounds.length-1)) * chartW}
-              y={chartH + 30}
-              textAnchor="middle" fontSize={10}
-              fill={C.leaf} fontWeight="700"
-            >R{r}</text>
+          {data.rounds.map((r,i)=>(
+            <text key={i} x={30+(i/(data.rounds.length-1))*chartW} y={chartH+30} textAnchor="middle" fontSize={10} fill={C.leaf} fontWeight="700">R{r}</text>
           ))}
-
-          {/* Electricity line */}
-          <polyline
-            points={data.rounds.map((r,i) => `${30 + (i/(data.rounds.length-1))*chartW},${toY(data.elec_loss[i])}`).join(' ')}
-            fill="none" stroke={C.river} strokeWidth={2.5} strokeLinejoin="round"
-          />
-          {data.rounds.map((r,i) => (
-            <circle key={i}
-              cx={30 + (i/(data.rounds.length-1))*chartW}
-              cy={toY(data.elec_loss[i])}
-              r={4} fill={C.river}
-            >
-              <title>Round {r}: {data.elec_loss[i].toFixed(5)}</title>
-            </circle>
+          <polyline points={data.rounds.map((r,i)=>`${30+(i/(data.rounds.length-1))*chartW},${toY(data.elec_loss[i])}`).join(' ')} fill="none" stroke={C.river} strokeWidth={2.5} strokeLinejoin="round" />
+          {data.rounds.map((r,i)=>(
+            <circle key={i} cx={30+(i/(data.rounds.length-1))*chartW} cy={toY(data.elec_loss[i])} r={4} fill={C.river}><title>Round {r}: {data.elec_loss[i].toFixed(5)}</title></circle>
           ))}
-
-          {/* Water line */}
-          <polyline
-            points={data.rounds.map((r,i) => `${30 + (i/(data.rounds.length-1))*chartW},${toY(data.water_loss[i])}`).join(' ')}
-            fill="none" stroke={C.clay} strokeWidth={2.5} strokeLinejoin="round"
-          />
-          {data.rounds.map((r,i) => (
-            <circle key={i}
-              cx={30 + (i/(data.rounds.length-1))*chartW}
-              cy={toY(data.water_loss[i])}
-              r={4} fill={C.clay}
-            >
-              <title>Round {r}: {data.water_loss[i].toFixed(5)}</title>
-            </circle>
+          <polyline points={data.rounds.map((r,i)=>`${30+(i/(data.rounds.length-1))*chartW},${toY(data.water_loss[i])}`).join(' ')} fill="none" stroke={C.clay} strokeWidth={2.5} strokeLinejoin="round" />
+          {data.rounds.map((r,i)=>(
+            <circle key={i} cx={30+(i/(data.rounds.length-1))*chartW} cy={toY(data.water_loss[i])} r={4} fill={C.clay}><title>Round {r}: {data.water_loss[i].toFixed(5)}</title></circle>
           ))}
-
-          {/* Legend */}
           <circle cx={45} cy={chartH+15} r={5} fill={C.river} />
           <text x={55} y={chartH+19} fontSize={10} fill={C.river} fontWeight="700">Electricity Model</text>
           <circle cx={160} cy={chartH+15} r={5} fill={C.clay} />
@@ -1002,28 +974,24 @@ function ConvergenceGraph() {
         </svg>
       </div>
 
-      {/* Improvement badges */}
       <div style={{ display:"flex", gap:12, marginTop:16, justifyContent:"center" }}>
         <div style={{ background:"#e8f3f8", padding:"8px 20px", borderRadius:20, border:`1px solid ${C.river}44` }}>
-          <span style={{ fontSize:13, color:C.river, fontWeight:800 }}>
-            ⚡ Electricity improved {improvement_e}% over 10 rounds
-          </span>
+          <span style={{ fontSize:13, color:C.river, fontWeight:800 }}>⚡ Electricity improved {improvement_e}% over 10 rounds</span>
         </div>
         <div style={{ background:"#fae8e0", padding:"8px 20px", borderRadius:20, border:`1px solid ${C.clay}44` }}>
-          <span style={{ fontSize:13, color:C.clay, fontWeight:800 }}>
-            💧 Water improved {improvement_w}% over 10 rounds
-          </span>
+          <span style={{ fontSize:13, color:C.clay, fontWeight:800 }}>💧 Water improved {improvement_w}% over 10 rounds</span>
         </div>
       </div>
     </div>
   )
 }
+
 // ── MAIN DASHBOARD ──────────────────────────────────────
 function Dashboard({ onLogout }) {
-  const [data, setData]         = useState(null)
+  const [data,      setData]      = useState(null)
   const [community, setCommunity] = useState(null)
-  const [tab, setTab]           = useState("my")
-  const [loading, setLoading]   = useState(true)
+  const [tab,       setTab]       = useState("my")
+  const [loading,   setLoading]   = useState(true)
   const houseId = getHouseId()
 
   useEffect(()=>{
@@ -1049,7 +1017,7 @@ function Dashboard({ onLogout }) {
   const tabs = {
     my        : "🏡 My Garden",
     community : "🌍 Community",
-    simulate  : "🎛️ Simulate", 
+    simulate  : "🎛️ Simulate",
     carbon    : "🌿 Carbon",
     privacy   : "🔒 Privacy",
     predict   : "📈 Forecast",
@@ -1060,12 +1028,7 @@ function Dashboard({ onLogout }) {
     <div style={{ minHeight:"100vh", background:C.bg, fontFamily:"'Nunito',sans-serif" }}>
 
       {/* Header */}
-      <div style={{
-        background:`linear-gradient(135deg, ${C.bark}, #5a3d2b)`,
-        padding:"14px 28px", display:"flex", alignItems:"center", justifyContent:"space-between",
-        position:"sticky", top:0, zIndex:100,
-        boxShadow:`0 4px 20px rgba(61,43,31,0.3)`
-      }}>
+      <div style={{ background:`linear-gradient(135deg, ${C.bark}, #5a3d2b)`, padding:"14px 28px", display:"flex", alignItems:"center", justifyContent:"space-between", position:"sticky", top:0, zIndex:100, boxShadow:`0 4px 20px rgba(61,43,31,0.3)` }}>
         <div style={{ display:"flex", alignItems:"center", gap:14 }}>
           <span style={{ fontSize:28, animation:"leafSway 3s ease-in-out infinite" }}>🌱</span>
           <div>
@@ -1075,22 +1038,9 @@ function Dashboard({ onLogout }) {
         </div>
         <div style={{ display:"flex", gap:4, alignItems:"center", flexWrap:"wrap" }}>
           {Object.entries(tabs).map(([key,label])=>(
-            <button key={key} className="nav-btn" onClick={()=>setTab(key)} style={{
-              padding:"7px 13px", borderRadius:8, border:"none",
-              cursor:"pointer", fontWeight:700, fontSize:12,
-              fontFamily:"'Nunito',sans-serif",
-              background: tab===key ? C.sage : "transparent",
-              color: tab===key ? C.bark : C.fern,
-              outline: tab===key ? `2px solid ${C.fern}` : "none"
-            }}>{label}</button>
+            <button key={key} className="nav-btn" onClick={()=>setTab(key)} style={{ padding:"7px 13px", borderRadius:8, border:"none", cursor:"pointer", fontWeight:700, fontSize:12, fontFamily:"'Nunito',sans-serif", background: tab===key ? C.sage : "transparent", color: tab===key ? C.bark : C.fern, outline: tab===key ? `2px solid ${C.fern}` : "none" }}>{label}</button>
           ))}
-          <button onClick={onLogout} style={{
-            padding:"7px 13px", borderRadius:8,
-            border:`1px solid ${C.leaf}`,
-            background:"transparent", color:C.fern,
-            cursor:"pointer", fontSize:12, fontWeight:700,
-            fontFamily:"'Nunito',sans-serif", marginLeft:8
-          }}>Leave</button>
+          <button onClick={onLogout} style={{ padding:"7px 13px", borderRadius:8, border:`1px solid ${C.leaf}`, background:"transparent", color:C.fern, cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"'Nunito',sans-serif", marginLeft:8 }}>Leave</button>
         </div>
       </div>
 
@@ -1099,20 +1049,11 @@ function Dashboard({ onLogout }) {
         {/* MY GARDEN */}
         {tab === "my" && (
           <div>
-            {/* Score + comparison */}
             <div style={{ display:"grid", gridTemplateColumns:"300px 1fr", gap:20, marginBottom:20 }}>
-              <div className="card-enter scale-enter" style={{
-                background:`linear-gradient(135deg, ${scoreBg}, ${C.card})`,
-                border:`2px solid ${scoreColor}44`,
-                borderRadius:18, padding:28,
-                display:"flex", flexDirection:"column", alignItems:"center", gap:14,
-                boxShadow:`0 8px 32px ${scoreColor}22`
-              }}>
+              <div className="card-enter scale-enter" style={{ background:`linear-gradient(135deg, ${scoreBg}, ${C.card})`, border:`2px solid ${scoreColor}44`, borderRadius:18, padding:28, display:"flex", flexDirection:"column", alignItems:"center", gap:14, boxShadow:`0 8px 32px ${scoreColor}22` }}>
                 <span style={{ fontSize:12, fontWeight:800, color:scoreColor, textTransform:"uppercase", letterSpacing:"1.5px" }}>Your GreenScore</span>
                 <ScoreRing score={data.green_score} size={160} />
-                <div style={{ padding:"6px 20px", borderRadius:20, background:scoreColor, color:"white", fontWeight:800, fontSize:13, fontFamily:"'Nunito',sans-serif" }}>
-                  {scoreLabel}
-                </div>
+                <div style={{ padding:"6px 20px", borderRadius:20, background:scoreColor, color:"white", fontWeight:800, fontSize:13, fontFamily:"'Nunito',sans-serif" }}>{scoreLabel}</div>
                 <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8, width:"100%" }}>
                   {[
                     { label:"Elec",  val:data.elec_score,  color:C.river },
@@ -1136,9 +1077,7 @@ function Dashboard({ onLogout }) {
                   <div key={i} style={{ marginBottom:20 }}>
                     <div style={{ display:"flex", justifyContent:"space-between", marginBottom:7 }}>
                       <span style={{ fontSize:13, color:C.bark, fontWeight:700 }}>{item.label}</span>
-                      <span style={{ fontSize:12, color:C.leaf, fontWeight:700 }}>
-                        You: <b style={{ color:item.color }}>{item.yours}</b> · Avg: <b style={{ color:C.bark }}>{item.avg}</b>
-                      </span>
+                      <span style={{ fontSize:12, color:C.leaf, fontWeight:700 }}>You: <b style={{ color:item.color }}>{item.yours}</b> · Avg: <b style={{ color:C.bark }}>{item.avg}</b></span>
                     </div>
                     <div style={{ position:"relative", background:C.sand, borderRadius:6, height:10 }}>
                       <div style={{ width:`${item.avg}%`, background:C.cream, height:10, borderRadius:6, position:"absolute", border:`1px solid ${C.sand}` }} />
@@ -1171,6 +1110,9 @@ function Dashboard({ onLogout }) {
               <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:18 }}>🌿 Personalized Suggestions for {houseId}</h3>
               {data.suggestions.map((s,i)=><SuggestionCard key={i} s={s} i={i} />)}
             </div>
+
+            {/* ── NEW: Email Alert Section ── */}
+            <EmailAlertSection houseId={houseId} userData={data} />
           </div>
         )}
 
@@ -1191,10 +1133,7 @@ function Dashboard({ onLogout }) {
               ))}
             </div>
 
-            <div className="card-enter" style={{
-              background:`linear-gradient(135deg, ${C.bark}, #5a3d2b)`,
-              borderRadius:16, padding:24, marginBottom:20
-            }}>
+            <div className="card-enter" style={{ background:`linear-gradient(135deg, ${C.bark}, #5a3d2b)`, borderRadius:16, padding:24, marginBottom:20 }}>
               {(()=>{
                 const sorted = [...community.houses].sort((a,b)=>b.green_score-a.green_score)
                 const rank   = sorted.findIndex(h=>h.house_id===houseId)+1
@@ -1203,9 +1142,7 @@ function Dashboard({ onLogout }) {
                     <div style={{ fontSize:48, fontWeight:900, color:C.sage, fontFamily:"'Playfair Display',serif" }}>#{rank}</div>
                     <div>
                       <div style={{ color:"white", fontWeight:800, fontSize:16, fontFamily:"'Playfair Display',serif" }}>Your Community Rank</div>
-                      <div style={{ color:C.fern, fontSize:13, marginTop:4, fontWeight:600 }}>
-                        Out of {community.total_houses} houses · GreenScore: <b style={{ color:C.sage }}>{data.green_score}</b>
-                      </div>
+                      <div style={{ color:C.fern, fontSize:13, marginTop:4, fontWeight:600 }}>Out of {community.total_houses} houses · GreenScore: <b style={{ color:C.sage }}>{data.green_score}</b></div>
                     </div>
                   </div>
                 )
@@ -1214,23 +1151,16 @@ function Dashboard({ onLogout }) {
 
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
               {[
-                { title:"Top 10 Most Efficient 🌿",  list:community.top10,    color:C.moss, bg:"#eaf2e0" },
+                { title:"Top 10 Most Efficient 🌿",   list:community.top10,    color:C.moss, bg:"#eaf2e0" },
                 { title:"Bottom 10 Most Wasteful 🍂", list:community.bottom10, color:C.clay, bg:"#fae8e0" },
               ].map((section,si)=>(
                 <div key={si} className="card-enter" style={{ background:C.card, borderRadius:16, padding:24, border:`1px solid ${C.border}` }}>
                   <h3 style={{ fontFamily:"'Playfair Display',serif", color:C.bark, marginBottom:16, fontSize:16 }}>{section.title}</h3>
                   {section.list.map((h,i)=>(
-                    <div key={h.house_id} style={{
-                      display:"flex", justifyContent:"space-between", alignItems:"center",
-                      padding:"9px 12px", borderRadius:8, marginBottom:6,
-                      background: h.house_id===houseId ? section.bg : C.cream,
-                      border:`1px solid ${h.house_id===houseId ? section.color+"55" : C.sand}`
-                    }}>
+                    <div key={h.house_id} style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"9px 12px", borderRadius:8, marginBottom:6, background: h.house_id===houseId ? section.bg : C.cream, border:`1px solid ${h.house_id===houseId ? section.color+"55" : C.sand}` }}>
                       <div style={{ display:"flex", gap:10, alignItems:"center" }}>
                         <span style={{ color:C.leaf, width:24, fontWeight:800, fontSize:12 }}>#{i+1}</span>
-                        <span style={{ fontSize:13, color:C.bark, fontWeight:h.house_id===houseId?800:600 }}>
-                          {h.house_id} {h.house_id===houseId && <span style={{ color:section.color, fontSize:11 }}>← you</span>}
-                        </span>
+                        <span style={{ fontSize:13, color:C.bark, fontWeight:h.house_id===houseId?800:600 }}>{h.house_id} {h.house_id===houseId && <span style={{ color:section.color, fontSize:11 }}>← you</span>}</span>
                       </div>
                       <span style={{ background:section.color, color:"white", padding:"3px 11px", borderRadius:20, fontWeight:800, fontSize:12 }}>{h.green_score}</span>
                     </div>
@@ -1248,6 +1178,9 @@ function Dashboard({ onLogout }) {
         {tab === "report"  && <ReportTab userData={data} />}
 
       </div>
+
+      {/* ── NEW: GreenBot floating chatbot ── */}
+      <GreenBot userData={data} />
     </div>
   )
 }
