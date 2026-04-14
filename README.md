@@ -11,13 +11,21 @@ Data stays on local devices
 Only model updates are shared
 No raw household data is exposed
 🎯 Key Features
+
 🔒 Privacy-Preserving AI (No raw data sharing)
+
 ⚡ Dual Resource Optimization (Electricity + Water)
+
 📊 Dual GreenScore (0–100 sustainability score)
+
 🤖 LSTM-based time series prediction
+
 🌍 Carbon footprint tracking
+
 🖥️ Interactive React dashboard
+
 🔁 Federated learning using FedAvg
+
 🧠 System Architecture
 
 User Devices → Local Training (LSTM) → Model Updates → FedAvg Aggregation → Global Model → GreenScore & Predictions
