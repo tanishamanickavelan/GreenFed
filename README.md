@@ -89,7 +89,7 @@ npm install
 npm run dev
 
 🔮 Future Work
-Real-time IoT integration
-Differential privacy (ε-budget)
-FedProx optimization
-Live smart meter data
+Real-time IoT integration,
+Differential privacy (ε-budget),
+FedProx optimization,
+Live smart meter data.
